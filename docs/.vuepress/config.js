@@ -14,7 +14,8 @@ module.exports = {
         lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav:[
             { text: 'Blog', link: '/guild/install' }, // 内部链接 以docs为根目录
-            { text: 'Photos',  items: [{ text: 'eat', link: '/guild/photos/eat'}]}, // 内部链接 以docs为根目录
+            { text: 'Photos',  
+                items: [{ text: 'view', link: '/photos/view'},{ text: 'eat', link: '/photos/eat'}]}, // 内部链接 以docs为根目录
             { text: 'Libraly', 
               items: [{ text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'}]// 外部链接
             }, 
