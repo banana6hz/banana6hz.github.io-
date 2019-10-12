@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /logo.jpg
+heroImage: /header-bg.jpg
 actionText: Here I am
 actionLink: /guild/install
 features:

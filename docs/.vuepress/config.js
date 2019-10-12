@@ -13,9 +13,8 @@ module.exports = {
         sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
         lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav:[
-            { text: 'Blog', link: '/guild/install' }, // 内部链接 以docs为根目录
-            { text: 'Photos',  
-                items: [{ text: 'view', link: '/photos/view'},{ text: 'eat', link: '/photos/eat'}]}, // 内部链接 以docs为根目录
+            { text: 'Blog', link: '/blog/guild' }, // 内部链接 以docs为根目录
+            { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             { text: 'Libraly', 
               items: [{ text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'}]// 外部链接
             }, 
@@ -27,18 +26,61 @@ module.exports = {
             ]
             }        
         ],
-        sidebar:[
-            {
-                title: 'Group 1',
-                collapsable: false,
-                children: [
-                  '/'
-                ]
-              },
-              {
-                title: 'Group 2',
-                children: [ /* ... */ ]
-              }
-        ]
+        sidebar: {
+            // 侧边栏在 /blog/上
+            '/blog/': [
+                {
+                    title:'工具',
+                    collapsable: true,
+                    children: [
+                        {
+                            title:'Git',
+                            collapsable: true,
+                            children: [
+                                ['/blog/tool/git/guild','Git指南'],
+                                ['/blog/tool/git/bug','踩坑记录']
+                            ]
+                        },
+                        {
+                            title:'vuepress',
+                            collapsable: true,
+                            children: [
+                                ['/blog/tool/vuepress/guild','vuepress指南']
+                            ]
+                        },
+                    ]
+                },
+                {
+                    title:'框架',
+                    collapsable: true,
+                    children: [
+                        {
+                            title:'Vue',
+                            collapsable: true,
+                            children: [
+                                ['/blog/vue/guild','Vue指南']
+                            ]
+                        },
+                    ]
+                }
+            ],
+            // 侧边栏在 /photos/ 上
+            '/photos/': [
+                {
+                    title:'view',
+                    collapsable: true,
+                    children: [
+                        ['/photos/view','风景']
+                    ]
+                },
+                {
+                    title:'eat',
+                    collapsable: true,
+                    children: [
+                        ['/photos/eat', '美食']
+                    ]
+                },
+            ]
+          }
     }
 }
