@@ -62,6 +62,19 @@ module.exports = {
                             ]
                         },
                     ]
+                },
+                {
+                    title:'zaza',
+                    collapsable: true,
+                    children: [
+                        {
+                            title:'zaza',
+                            collapsable: true,
+                            children: [
+                                ['/blog/zaza/moyutogether','moyutogether']
+                            ]
+                        },
+                    ]
                 }
             ],
             // 侧边栏在 /photos/ 上
@@ -70,14 +83,14 @@ module.exports = {
                     title:'view',
                     collapsable: true,
                     children: [
-                        ['/photos/view','风景']
+                        ['/photos/view','view']
                     ]
                 },
                 {
                     title:'eat',
                     collapsable: true,
                     children: [
-                        ['/photos/eat', '美食']
+                        ['/photos/eat', 'eat']
                     ]
                 },
             ]
