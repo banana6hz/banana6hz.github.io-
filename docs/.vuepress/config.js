@@ -16,7 +16,9 @@ module.exports = {
             { text: 'Blog', link: '/blog/guild' }, // 内部链接 以docs为根目录
             { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             { text: 'Libraly', 
-              items: [{ text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'}]// 外部链接
+              items: [
+                  { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
+                  { text: 'Markdown', link:'https://www.jianshu.com/p/191d1e21f7ed'}]// 外部链接
             }, 
             // 下拉列表
             {
