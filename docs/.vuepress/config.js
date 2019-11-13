@@ -63,6 +63,13 @@ module.exports = {
                                 ['/blog/vue/guild','Vue指南']
                             ]
                         },
+                        {
+                            title:'Koa',
+                            collapsable: true,
+                            children: [
+                                ['/blog/koa/koaGuild','koa指南']
+                            ]
+                        }
                     ]
                 },
                 {
