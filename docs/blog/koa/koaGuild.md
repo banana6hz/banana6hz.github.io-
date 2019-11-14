@@ -54,4 +54,6 @@
 
     module.exports = router
     ```  
-    这样直接访问页面出来的就是:point_right:view文件夹下index.html的内容了
+    这样直接访问页面出来的就是:point_right:view文件夹下index.html的内容了  
+10. 安装koa-static，并新建public文件夹存放静态资源，运行`npm install koa-static -S`  
+https://www.jb51.net/article/132352.htm
