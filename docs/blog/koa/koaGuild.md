@@ -55,5 +55,27 @@
     module.exports = router
     ```  
     这样直接访问页面出来的就是:point_right:view文件夹下index.html的内容了  
-10. 安装koa-static，并新建public文件夹存放静态资源，运行`npm install koa-static -S`  
+10. 安装koa-static，并新建public文件夹存放静态资源，运行`npm install koa-static -S`,然后在app.js里添加以下代码  
+    ```
+    const static = require('koa-static')// allowedMethods 用于校验请求的方法，如果用 post 请求访问 get 接口，就会直接返回失败     
+    const main = static(_dirname + '/public')// 将 public 目录设置为静态资源目录      
+    app.use(main)
+    ```  
+11. 安装koa-views `npm install koa-views -S`,在app.js添加一下代码  
+    ```
+    const views = require('koa-views')
+    app.use(views(_dirname + '/views')
+    ```  
+12. 然后在路由文件中，就能使用 render 方法了  
+    ```
+    // routes/index.js
+    
+    const router = require('koa-router')()
+    
+    router.get('/index', async (ctx, next) => {
+    await ctx.render('index');
+    });
+    
+    module.exports = router
+    ```
 https://www.jb51.net/article/132352.htm
