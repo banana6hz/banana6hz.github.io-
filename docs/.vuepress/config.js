@@ -60,7 +60,8 @@ module.exports = {
                             title:'Vue',
                             collapsable: true,
                             children: [
-                                ['/blog/vue/guild','Vue指南']
+                                ['/blog/vue/guild','Vue指南'],
+                                ['/blog/vue/mock','mock假数据']
                             ]
                         },
                         {
