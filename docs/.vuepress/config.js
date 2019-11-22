@@ -18,7 +18,10 @@ module.exports = {
             { text: 'Libraly', 
               items: [
                   { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
-                  { text: 'Markdown', link:'https://www.jianshu.com/p/191d1e21f7ed'}]// 外部链接
+                  { text: 'Markdown', link:'https://www.jianshu.com/p/191d1e21f7ed'},
+                  { text: '在线工具', link:'https://tool.oschina.net/commons'},
+                  { text: '设计导航', link:'http://hao.shejidaren.com/'}
+                ]// 外部链接
             }, 
             // 下拉列表
             {
