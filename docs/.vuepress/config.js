@@ -84,7 +84,8 @@ module.exports = {
                             title:'zaza',
                             collapsable: true,
                             children: [
-                                ['/blog/zaza/moyutogether','moyutogether']
+                                ['/blog/zaza/moyutogether','moyutogether'],
+                                ['/blog/zaza/center','水平垂直居中']
                             ]
                         },
                     ]
