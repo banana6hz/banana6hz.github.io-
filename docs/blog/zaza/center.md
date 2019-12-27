@@ -2,7 +2,7 @@ CSS实现水平垂直居中
 ---
 ####一、水平居中
     1. 行内元素： `text-align:center`
-    2. 定宽块级元素： `margin:0 auto`
+    2. 定宽块级元素： `margin:0 auto` `margin-left:auto;margin-right:auto`
     3. 不定宽块级元素:
         3.1 设置table
             ```

@@ -1,6 +1,6 @@
 module.exports = {
-    title: 'Here I am',
-    description: 'Banana_Blog',
+    title: 'Six',
+    description: 'Six_Blog',
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
         ['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
@@ -20,7 +20,8 @@ module.exports = {
                   { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
                   { text: 'Markdown', link:'https://www.jianshu.com/p/191d1e21f7ed'},
                   { text: '在线工具', link:'https://tool.oschina.net/commons'},
-                  { text: '设计导航', link:'http://hao.shejidaren.com/'}
+                  { text: '设计导航', link:'http://hao.shejidaren.com/'},
+                  { text: 'Typing', link:'https://www.keybr.com/'}
                 ]// 外部链接
             }, 
             // 下拉列表
@@ -111,3 +112,31 @@ module.exports = {
           }
     }
 }
+/*
+                           \\\|||///
+                            \\|||//
+                            ———————
+                           /(.)-(.)\
+                     O     \   v   /
+                    / \     ———————
+                    | |   / |     | \
+                    | |\_/  |     |  \
+                    | |     |_____|   \
+                    | |    / / | \ \   O
+                    | |   / /  |  \ \ 
+                    | |  / /   |   \ \
+
+                 へ         ／| 
+                     /＼7    ∠＿/ 
+                    / │     ／ ／ 
+                   │ Z ＿,＜ ／   /`ヽ 
+                   │       ヽ    /   〉
+                    Y       `   /   / 
+                   ｲ● ､ ●   ⊂⊃〈   /
+                   () へ       | ＼〈
+                    >ｰ ､_   ィ │ ／／ 
+                    / へ   / ﾉ＜| ＼＼ 
+                    ヽ_ﾉ  (_／  │／／ 
+                    7           |／ 
+                    ＞―r￣￣`ｰ―＿
+*/

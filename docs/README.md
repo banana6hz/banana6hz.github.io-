@@ -1,11 +1,11 @@
 ---
 home: true
 heroImage: /header-bg.jpg
-actionText: Here I am
+actionText: Banana
 actionLink: /guild/install
 features:
 - title: 今天也要加油鸭
-  details: 我有一只小毛驴，我从来也不骑~
+  details: 咸鱼漫步，每天进步一点点！
 - title: 阿姨洗铁路
-  details: 香蕉你个不拿拿o 
+  details: balala
 footer: Copyright © 2019-present Banana
