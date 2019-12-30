@@ -57,6 +57,34 @@ module.exports = {
                     ]
                 },
                 {
+                    title:'基础',
+                    collapsable: true,
+                    children: [
+                        {
+                            title:'HTML',
+                            collapsable: true,
+                            children: [
+                                ['/blog/basic/html/guild','HTML指南']
+                            ]
+                        },
+                        {
+                            title:'CSS',
+                            collapsable: true,
+                            children: [
+                                ['/blog/basic/css/guild','css指南'],
+                                ['/blog/basic/css/flex','flex布局']
+                            ]
+                        },
+                        {
+                            title:'Javascript',
+                            collapsable: true,
+                            children: [
+                                ['/blog/basic/javascript/guild','js指南']
+                            ]
+                        }
+                    ]
+                },
+                {
                     title:'框架',
                     collapsable: true,
                     children: [
