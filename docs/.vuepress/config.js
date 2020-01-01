@@ -54,6 +54,13 @@ module.exports = {
                                 ['/blog/tool/vuepress/guild','vuepress指南']
                             ]
                         },
+                        {
+                            title:'markdown',
+                            collapsable: true,
+                            children: [
+                                ['/blog/tool/markdown/guild','markdown指南']
+                            ]
+                        }
                     ]
                 },
                 {
