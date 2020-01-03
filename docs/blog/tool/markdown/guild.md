@@ -102,4 +102,15 @@ title可加可不加
 	style A fill:#2ff,fill-opacity:0.1,stroke:#faa,stroke-width:4px
 	style D stroke:#000,stroke-width:8px;
 ```
-为什么不粗来，我困了...:tea:
+为什么不粗来，我困了...:tea:  
+st=>start: Start:>https://www.zybuluo.com
+io=>inputoutput: verification
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+sub=>subroutine: Your Subroutine
+e=>end
+
+st->io->op->cond
+cond(yes)->e
+cond(no)->sub->io  
+好像还是不行...未解之谜:boom:
