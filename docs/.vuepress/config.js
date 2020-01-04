@@ -86,7 +86,8 @@ module.exports = {
                             title:'Javascript',
                             collapsable: true,
                             children: [
-                                ['/blog/basic/javascript/guild','js指南']
+                                ['/blog/basic/javascript/guild','js指南'],
+                                ['/blog/basic/javascript/eventloop','js事件']
                             ]
                         }
                     ]
