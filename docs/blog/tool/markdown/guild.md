@@ -113,4 +113,4 @@ e=>end
 st->io->op->cond
 cond(yes)->e
 cond(no)->sub->io  
-好像还是不行...未解之谜:boom:
+好像还是不行...未解之谜:boom::boom:
