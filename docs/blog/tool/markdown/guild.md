@@ -8,11 +8,17 @@ Markdown是一种纯文本格式的标记语言。通过简单的标记语法，
     ##### 这是五级标题
     ###### 这是六级标题    
 用法：#后加空格再加内容，一级的字号最大  
-### 二、字体
-- **加粗**： 前后用两个**包裹要加粗的内容 `**加粗**` **加粗**  
-- **斜体**： 前后用一个*包裹要斜体的内容 `*斜体*` *斜体*  
-- **加粗斜体**：前后用三个***包裹要加粗斜体的文字 `***加粗斜体***` ***加粗斜体***  
-- **删除线**：前后用~~包裹要添加删除线的内容 `~~删除线~~` ~~删除线~~  
+### 二、字体样式
+序号|源代码|效果
+:---:|:--:|:---:
+1|`*斜体*或_斜体字_`|*斜体*  
+2|`**加粗**或__粗体__`|**加粗**
+3|`***加粗斜体***或___加粗斜体___`|***加粗斜体***
+4|`~~删除线~~`|~~删除线~~  
+5|`<u>下划线</u>`|<u>下划线</u>
+6|`X<sup>2</sup>`|X<sup>2</sup>  
+7|`H<sub>2</sub>O`|H<sub>2</sub>O 
+8|`字体颜色<font face="微软雅黑" size=6 color=#FF0000 >微软雅黑字体</font>`|<font face="微软雅黑" size=6 color=#FF0000 >微软雅黑字体</font>   
 ### 三、引用  
 在引用内容前面加>即可，可嵌套加多个>  
 >这是引用内容 `>这是引用内容` 
@@ -25,11 +31,12 @@ Markdown是一种纯文本格式的标记语言。通过简单的标记语法，
 图片alt就是显示在图片下面的文字，相当于对图片内容的解释。  
 图片title是图片的标题，当鼠标移到图片上时显示的内容。title可加可不加  
 ### 六、超链接  
-- `[超链接名](超链接地址 "超链接title")`
-title可加可不加  
-[百度](http://baidu.com) `[百度](http://baidu.com)`   
-- `<a href="超链接地址" target="_blank">超链接名</a>`  
-<a href="http://baidu.com" target="_blank">百度</a> `<a href="http://baidu.com" target="_blank">百度</a>`  
+源代码|效果
+:--:|:---:  
+`[百度](http://baidu.com "超链接title")`<br>*title可加可不加*|[百度](http://baidu.com "超链接title") 
+`<a href="http://baidu.com" target="_blank">百度</a>`|<a href="http://baidu.com" target="_blank">百度</a>    
+`直接链接：<http://baidu.com>`|直接链接：<http://baidu.com>
+`邮箱地址自动链接 nielifei.cn@gmail.com`|邮箱地址自动链接 1758063490@qq.com
 ### 七、列表  
 - 无序列表:- + *任一种加**空格**再加列表名称
 ```
@@ -62,7 +69,7 @@ title可加可不加
 3. 有序列表3  
 ### 八、表格  
 ```
-表头|表头|表头
+居左对齐（默认）|居中对齐|居右对齐
 ---|:--:|---:
 1|2|3
 内容|内容|内容
@@ -74,8 +81,8 @@ title可加可不加
 -右边加：表示文字居右
 注：原生的语法两边都要用 | 包起来。此处省略
 ```
-表头|表头|表头
----|:--:|---:
+居左对齐（默认）|居中对齐|居右对齐
+:---|:--:|---:
 1|2|3
 内容|内容|内容  
 ### 九、代码
@@ -114,3 +121,20 @@ st->io->op->cond
 cond(yes)->e
 cond(no)->sub->io  
 好像还是不行...未解之谜:boom::boom:?
+### 十一、
+```
+Markdown 换行：
+<br>
+
+Markdown 段首缩进：
+&ensp; or &#8194; 表示一个半角的空格
+&emsp; or &#8195;  表示一个全角的空格
+&emsp;&emsp; 两个全角的空格（用的比较多）
+&nbsp; or &#160; 不断行的空白格
+```
+生成一个脚注[^footnote].  
+[^footnote]: 这里是 **脚注** 的 *内容*.   
+[markdown](https://www.jianshu.com/c/65c0f5f216cc)
+[bgcolor](http://www.voidcn.com/article/p-firwkkkw-vc.html) 
+[HTML字符](https://www.w3school.com.cn/tags/html_ref_symbols.html)
+[emiji](https://emojipedia.org/)
