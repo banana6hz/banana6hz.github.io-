@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'Six',
+    title: '🤡Six',
     description: 'Better',
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
@@ -86,6 +86,7 @@ module.exports = {
                             collapsable: true,
                             children: [
                                 ['/blog/basic/javascript/guild','js指南'],
+                                ['/blog/basic/javascript/event','js单线程'],
                                 ['/blog/basic/javascript/eventloop','js事件']
                             ]
                         }
