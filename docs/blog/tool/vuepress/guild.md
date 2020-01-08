@@ -48,33 +48,27 @@ touch config.js
         "build": "vuepress build docs" //打包项目
     }
 ```  
+此时运行 `npm run dev` 就可以打开页面了   
 &emsp;&emsp;✧ config.js：添加以下代码
 ```
-module.exports = {
-    title: 'vuePress模板博客',
-    description: '我的个人网站',
-    head: [ // 注入到当前页面的 HTML <head> 中的标签
-        ['link', { rel: 'icon', href: '/logo.jpg' }], // 增加一个自定义的 favicon(网页标签的图标)
-    ],
-    base: '/', // 这是部署到github相关的配置
-    markdown: {
-        lineNumbers: false // 代码块显示行号
-    },
-    themeConfig: {
-        nav: [ // 导航栏配置
-            { text: 'GitHub', link: 'https://github.com/caoyezi' },
-            { text: '简书', link: 'https://www.jianshu.com/u/2ce8cb7701b8' },
-            { text: '有问题请问我', link: 'https://baidu.com' }
-        ],
-        sidebar: [{ // 左侧导航栏配置
-                    title: 'Vuepress搭建'
-                    // collapsable: false, //是否展开
-                },
-                ['/accumulate/2019/准备工作', '准备工作']
-            ]
-            // sidebar: 'auto', // 侧边栏配置
-            // sidebarDepth: 2, // 侧边栏显示2级
-    }
-};
+
+```  
+&emsp;&emsp;✧ README.md：添加以下代码  
 ```
+---
+home: true
+heroImage: /header-bg.jpg
+heroText: 👩‍💻
+tagline: Cogito Ergo Sum
+actionText: Banana
+actionLink: /guild/install
+features:
+- title: '今天也要加油鸭🦆'
+  details: '咸鱼🐟漫步，每天进步一点点🤪！'
+- title: 'HAPPY NEW YEAR🎇'
+  details: Only if you ask to see me,our meeting would be meaningful to me.
+footer: © 2020-present Six_Banana
+---
+```
+![vuepress_2](../../../.vuepress/imgs/blog/tools/vuepress/vuepress_2.png)
 
