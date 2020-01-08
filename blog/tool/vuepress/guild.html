@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Vuepress搭建个人博客网站 | 🤡Six</title>
-    <meta name="description" content="Better">
+    <meta name="description" content="">
     <link rel="icon" href="/favicon.ico">
     
-    <link rel="preload" href="/assets/css/0.styles.f3aaf33d.css" as="style"><link rel="preload" href="/assets/js/app.2f129d2a.js" as="script"><link rel="preload" href="/assets/js/2.a4fdd9d3.js" as="script"><link rel="preload" href="/assets/js/7.d88a94d1.js" as="script"><link rel="prefetch" href="/assets/js/10.d103bb5f.js"><link rel="prefetch" href="/assets/js/11.e1bd1b97.js"><link rel="prefetch" href="/assets/js/12.24d15ade.js"><link rel="prefetch" href="/assets/js/13.01bf5bbc.js"><link rel="prefetch" href="/assets/js/14.d658fa36.js"><link rel="prefetch" href="/assets/js/15.07533504.js"><link rel="prefetch" href="/assets/js/16.2c6a1c62.js"><link rel="prefetch" href="/assets/js/17.eb185f6c.js"><link rel="prefetch" href="/assets/js/18.dea738fd.js"><link rel="prefetch" href="/assets/js/19.2bcff464.js"><link rel="prefetch" href="/assets/js/20.e71ec74d.js"><link rel="prefetch" href="/assets/js/21.4a9031d6.js"><link rel="prefetch" href="/assets/js/22.390f8909.js"><link rel="prefetch" href="/assets/js/23.95e88675.js"><link rel="prefetch" href="/assets/js/24.5303cfdb.js"><link rel="prefetch" href="/assets/js/25.22aa31a9.js"><link rel="prefetch" href="/assets/js/3.cfc90694.js"><link rel="prefetch" href="/assets/js/4.0189576b.js"><link rel="prefetch" href="/assets/js/5.b9c2b214.js"><link rel="prefetch" href="/assets/js/6.0ff54061.js"><link rel="prefetch" href="/assets/js/8.e775bd77.js"><link rel="prefetch" href="/assets/js/9.7410dc2e.js">
+    <link rel="preload" href="/assets/css/0.styles.f3aaf33d.css" as="style"><link rel="preload" href="/assets/js/app.6759e985.js" as="script"><link rel="preload" href="/assets/js/2.83646994.js" as="script"><link rel="preload" href="/assets/js/5.57954702.js" as="script"><link rel="prefetch" href="/assets/js/10.8de41a1c.js"><link rel="prefetch" href="/assets/js/11.1c3ff952.js"><link rel="prefetch" href="/assets/js/12.ac678aa9.js"><link rel="prefetch" href="/assets/js/13.21ab02f1.js"><link rel="prefetch" href="/assets/js/14.9839d6b3.js"><link rel="prefetch" href="/assets/js/15.1d74be08.js"><link rel="prefetch" href="/assets/js/16.37658a8f.js"><link rel="prefetch" href="/assets/js/17.741d2acc.js"><link rel="prefetch" href="/assets/js/18.6080f89e.js"><link rel="prefetch" href="/assets/js/19.374830c3.js"><link rel="prefetch" href="/assets/js/20.f80f1668.js"><link rel="prefetch" href="/assets/js/21.9e8568a4.js"><link rel="prefetch" href="/assets/js/22.9ca4e804.js"><link rel="prefetch" href="/assets/js/23.50e20f1d.js"><link rel="prefetch" href="/assets/js/24.ccf1f2b6.js"><link rel="prefetch" href="/assets/js/25.22aa31a9.js"><link rel="prefetch" href="/assets/js/3.63f86470.js"><link rel="prefetch" href="/assets/js/4.ad7ec042.js"><link rel="prefetch" href="/assets/js/6.a05086d2.js"><link rel="prefetch" href="/assets/js/7.6144ac3e.js"><link rel="prefetch" href="/assets/js/8.b78e2ac4.js"><link rel="prefetch" href="/assets/js/9.a80890ac.js">
     <link rel="stylesheet" href="/assets/css/0.styles.f3aaf33d.css">
   </head>
   <body>
@@ -60,37 +60,27 @@ touch config.js
         &quot;dev&quot;: &quot;vuepress dev docs&quot;, //启动项目
         &quot;build&quot;: &quot;vuepress build docs&quot; //打包项目
     }
-</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>  ✧ config.js：添加以下代码</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>module.exports = {
-    title: 'vuePress模板博客',
-    description: '我的个人网站',
-    head: [ // 注入到当前页面的 HTML &lt;head&gt; 中的标签
-        ['link', { rel: 'icon', href: '/logo.jpg' }], // 增加一个自定义的 favicon(网页标签的图标)
-    ],
-    base: '/', // 这是部署到github相关的配置
-    markdown: {
-        lineNumbers: false // 代码块显示行号
-    },
-    themeConfig: {
-        nav: [ // 导航栏配置
-            { text: 'GitHub', link: 'https://github.com/caoyezi' },
-            { text: '简书', link: 'https://www.jianshu.com/u/2ce8cb7701b8' },
-            { text: '有问题请问我', link: 'https://baidu.com' }
-        ],
-        sidebar: [{ // 左侧导航栏配置
-                    title: 'Vuepress搭建'
-                    // collapsable: false, //是否展开
-                },
-                ['/accumulate/2019/准备工作', '准备工作']
-            ]
-            // sidebar: 'auto', // 侧边栏配置
-            // sidebarDepth: 2, // 侧边栏显示2级
-    }
-};
-</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">10/12/2019, 4:54:23 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>此时运行 <code>npm run dev</code> 就可以打开页面了<br>
+  ✧ config.js：添加以下代码</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>  ✧ README.md：添加以下代码</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>---
+home: true
+heroImage: /header-bg.jpg
+heroText: 👩‍💻
+tagline: Cogito Ergo Sum
+actionText: Banana
+actionLink: /guild/install
+features:
+- title: '今天也要加油鸭🦆'
+  details: '咸鱼🐟漫步，每天进步一点点🤪！'
+- title: 'HAPPY NEW YEAR🎇'
+  details: Only if you ask to see me,our meeting would be meaningful to me.
+footer: © 2020-present Six_Banana
+---
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><img src="/assets/img/vuepress_2.5a1c71e4.png" alt="vuepress_2"></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">1/7/2020, 4:51:04 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
       ←
       <a href="/blog/tool/git/bug.html" class="prev">踩坑记录</a></span> <span class="next"><a href="/blog/tool/markdown/guild.html">markdown指南</a>
       →
     </span></p></div> </main></div><div class="global-ui"></div></div>
-    <script src="/assets/js/app.2f129d2a.js" defer></script><script src="/assets/js/2.a4fdd9d3.js" defer></script><script src="/assets/js/7.d88a94d1.js" defer></script>
+    <script src="/assets/js/app.6759e985.js" defer></script><script src="/assets/js/2.83646994.js" defer></script><script src="/assets/js/5.57954702.js" defer></script>
   </body>
 </html>
