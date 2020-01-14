@@ -85,6 +85,7 @@ module.exports = {
                             collapsable: true,
                             children: [
                                 ['/blog/basic/javascript/guild','js指南'],
+                                ['/blog/basic/javascript/browserRendering','浏览器渲染'],
                                 ['/blog/basic/javascript/event','js单线程'],
                                 ['/blog/basic/javascript/eventloop','js事件']
                             ]
