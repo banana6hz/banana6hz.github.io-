@@ -65,12 +65,13 @@ Chrome 采用多进程架构,其顶层存在一个 Browser process 用以协调�
 
 因此如果 JS 执行的时间过长,这样就会造成页面的渲染不连贯,导致页面渲染加载阻塞的感觉。
 
-#### 3. css 加载会造成阻塞吗？  
+#### 3. css 加载会造成阻塞吗？   
+DOM和CSSOM通常是并行构建的，所以<font color=#ec7259>CSS加载不会阻塞DOM的解析</font>  
+但是Render Tree是依赖于DOM Tree 和 CSSOM Tree的，就是说要等到CSSOM Tree加载完成才能渲染，所以<font color=#ec7259>CSS的加载会阻塞页面的渲染</font>  
 
-
-
----
-😑我累了...好饿😵
+由于 JavaScript 是可操纵 DOM 和 css 样式 的,如果在修改这些元素属性同时渲染界面（即 JavaScript 线程和 UI 线程同时运行）,那么渲染线程前后获得的元素数据就可能不一致了。  
+所以浏览器设定JS引擎线程和GUI线程是互斥的  
+因此样式表会在后面的 js 执行前先加载执行完毕，所以<font color=#ec7259>CSS会阻塞JS的执行</font>
 
 
 
