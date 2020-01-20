@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /header-bg.jpg
+heroImage: /firework.gif
 heroText: 👩‍💻
 tagline: Cogito Ergo Sum
 actionText: Banana

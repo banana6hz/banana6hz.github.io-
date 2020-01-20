@@ -1,6 +1,6 @@
 ### Flex--弹性布局
 ***  
-:warning:：设为弹性布之后，子元素的 `float`,`clear`,`vertical-align` 将失效  
+:warning:：设为弹性布局之后，子元素的 `float`,`clear`,`vertical-align` 将失效  
 <br>
 ![flex](../../../.vuepress/imgs/blog/css/flex/flex.png) 
 1. #### 用法  
