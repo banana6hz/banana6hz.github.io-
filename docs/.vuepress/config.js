@@ -22,12 +22,25 @@ module.exports = {
                   { text: 'Typing', link:'https://www.keybr.com/'}
                 ]// 外部链接
             }, 
+            { text: 'debug',
+              items: [
+                  { text: 'css', link: './debug/css'},
+                  { text: 'js', link: '/debug/js'},
+                  { text: 'net', link: '/debug/net'}
+              ]
+            },
+            { text: 'interview',
+              items: [
+                  { text: 'css', link: './interview/css'},
+                  { text: 'js', link: '/interview/js'},
+                  { text: 'net', link: '/interview/net'}
+              ]
+            },
             // 下拉列表
-            {
-            text: 'About Me',
-            items: [
-                { text: 'GitHub地址', link: 'https://github.com/banana6hz' },
-            ]
+            { text: 'About Me',
+              items: [
+                  { text: 'GitHub地址', link: 'https://github.com/banana6hz' },
+              ]
             }        
         ],
         sidebar: {
