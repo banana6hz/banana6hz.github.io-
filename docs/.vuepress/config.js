@@ -24,18 +24,12 @@ module.exports = {
             }, 
             { text: 'debug',
               items: [
-                  { text: 'css', link: './debug/css'},
+                  { text: 'css', link: '/debug/css'},
                   { text: 'js', link: '/debug/js'},
                   { text: 'net', link: '/debug/net'}
               ]
             },
-            { text: 'interview',
-              items: [
-                  { text: 'css', link: './interview/css'},
-                  { text: 'js', link: '/interview/js'},
-                  { text: 'net', link: '/interview/net'}
-              ]
-            },
+            { text: 'interview',link: '/interview/guild'},
             // 下拉列表
             { text: 'About Me',
               items: [
@@ -157,8 +151,31 @@ module.exports = {
                         ['/photos/eat', 'eat']
                     ]
                 },
+            ],
+            '/interview/': [
+                {
+                    title:'js',
+                    collapsable: true,
+                    children: [
+                        ['/interview/js/01','js']
+                    ]
+                },
+                {
+                    title:'css',
+                    collapsable: true,
+                    children: [
+                        ['/interview/css/css', 'css']
+                    ]
+                },
+                {
+                    title:'net',
+                    collapsable: true,
+                    children: [
+                        ['/interview/net/net', 'net']
+                    ]
+                },
             ]
-          }
+        }
     }
 }
 /*
