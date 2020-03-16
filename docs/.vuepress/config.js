@@ -29,7 +29,7 @@ module.exports = {
                   { text: 'net', link: '/debug/net'}
               ]
             },
-            { text: 'interview',link: '/interview/guild'},
+            { text: 'daily',link: '/daily/guild'},
             // 下拉列表
             { text: 'About Me',
               items: [
@@ -152,26 +152,26 @@ module.exports = {
                     ]
                 },
             ],
-            '/interview/': [
+            '/daily/': [
                 {
                     title:'js',
                     collapsable: true,
                     children: [
-                        ['/interview/js/01','js']
+                        ['/daily/js/01','js']
                     ]
                 },
                 {
                     title:'css',
                     collapsable: true,
                     children: [
-                        ['/interview/css/css', 'css']
+                        ['/daily/css/css', 'css']
                     ]
                 },
                 {
                     title:'net',
                     collapsable: true,
                     children: [
-                        ['/interview/net/net', 'net']
+                        ['/daily/net/net', 'net']
                     ]
                 },
             ]
