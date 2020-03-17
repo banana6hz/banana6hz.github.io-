@@ -30,6 +30,7 @@ module.exports = {
               ]
             },
             { text: 'daily',link: '/daily/guild'},
+            { text: 'books',link: '/books/guild'},
             // 下拉列表
             { text: 'About Me',
               items: [
