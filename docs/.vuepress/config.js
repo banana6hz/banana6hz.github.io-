@@ -109,7 +109,8 @@ module.exports = {
                             collapsable: true,
                             children: [
                                 ['/blog/vue/guild','Vue指南'],
-                                ['/blog/vue/mock','mock假数据']
+                                ['/blog/vue/mock','mock假数据'],
+                                ['/blog/vue/vueinit','vue手动搭建']
                             ]
                         },
                         {
