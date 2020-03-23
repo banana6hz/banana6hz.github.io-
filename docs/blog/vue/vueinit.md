@@ -21,3 +21,5 @@
 这个错误呢就是告诉我们，需要为app.vue这个文件声明一个loader，因为webpack只支持js类型的文件，添加即可
 ![vueinit_07](../../.vuepress/imgs/blog/vue/vueinit/vueinit_07.png)
 
+https://blog.csdn.net/Tokki_/article/details/90766971
+
