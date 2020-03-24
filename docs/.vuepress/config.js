@@ -110,7 +110,7 @@ module.exports = {
                             children: [
                                 ['/blog/vue/guild','Vue指南'],
                                 ['/blog/vue/mock','mock假数据'],
-                                ['/blog/vue/vueinit','vue手动搭建']
+                                ['/blog/vue/myvue','vue手动搭建']
                             ]
                         },
                         {
