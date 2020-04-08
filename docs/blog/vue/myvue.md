@@ -499,6 +499,12 @@ class Person {
 }
 const person = new Person("Ben", 28);
 person.sayHello();
+```  
+
+#### 九、配置路径src
+- webpack.base.conf.js  
+```js
+
 ```
 
 
