@@ -1,5 +1,5 @@
 module.exports = {
-    title: '🤡Six',
+    title: 'LIUHZ`sBLOG',
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
         ['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
@@ -13,7 +13,8 @@ module.exports = {
         lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav:[
             { text: 'Blog', link: '/blog/guild' }, // 内部链接 以docs为根目录
-            { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
+            // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
+            { text: 'debug',link: '/debug/css'}, 
             { text: 'Libraly', 
               items: [
                   { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
@@ -22,13 +23,6 @@ module.exports = {
                   { text: 'Typing', link:'https://www.keybr.com/'}
                 ]// 外部链接
             }, 
-            { text: 'debug',
-              items: [
-                  { text: 'css', link: '/debug/css'},
-                  { text: 'js', link: '/debug/js'},
-                  { text: 'net', link: '/debug/net'}
-              ]
-            },
             { text: 'daily',link: '/daily/guild'},
             { text: 'books',link: '/books/guild'},
             // 下拉列表
@@ -130,10 +124,33 @@ module.exports = {
                             title:'zaza',
                             collapsable: true,
                             children: [
-                                ['/blog/zaza/moyutogether','moyutogether'],
                                 ['/blog/zaza/center','水平垂直居中']
                             ]
                         },
+                    ]
+                }
+            ],
+            // 侧边栏在 /debug/ 上
+            '/debug/': [
+                {
+                    title: 'css', 
+                    collapsable: true,
+                    children: [
+                        [ '/debug/css','css']
+                    ]
+                },
+                { 
+                    title: 'js', 
+                    collapsable: true,
+                    children: [
+                        [ '/debug/js','js']
+                    ]
+                },
+                { 
+                    title: 'net', 
+                    collapsable: true,
+                    children: [
+                        [ '/debug/net','net']
                     ]
                 }
             ],

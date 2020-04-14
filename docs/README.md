@@ -1,14 +1,16 @@
 ---
 home: true
-heroImage: /firework.gif
+heroImage: /logo.jpg
 heroText: 👩‍💻
 tagline: Cogito Ergo Sum
 actionText: Banana
 actionLink: /guild/install
 features:
-- title: '今天也要加油鸭🦆'
-  details: '咸鱼🐟漫步，每天进步一点点🤪！'
-- title: 'HAPPY NEW YEAR🎇'
-  details: We are all in the gutter，but some of us are looking at the stars.
-footer: © 2020-present Six_Banana
+- title: '📑 基础巩固'
+  details: 不断学习、巩固自己的前端知识，形成自己的知识体系。
+- title: '📑 工作记录'
+  details: 记录在工作、学习中的踩坑经历，不断总结。
+- title: '📚 今天也要加油呀'
+  details: '每天进步一点点👻！'
+footer: © 2020-present LIUHZ
 ---
