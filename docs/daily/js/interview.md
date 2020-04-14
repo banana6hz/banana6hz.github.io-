@@ -1,0 +1,49 @@
+### JS面试题
+
+[[toc]]
+
+---
+### 一、下面代码的输出是什么？ 
+1. 变量提升
+```js
+function sayHi() {
+  console.log(name);
+  console.log(age);
+  var name = "Banana";
+  let age = 21;
+}
+sayHi();
+```  
+<details><summary><b>Answer</b></summary>
+<p>
+在函数中，var关键字声明了name变量, 这意味着变量在创建阶段会被提升（JavaScript会在创建变量创建阶段为其分配内存空间），默认值为undefined，直到我们实际执行该变量的赋值语句，进入赋赋值阶段。 执行到console.log(name)语句的时候我们还没有为name变量赋值，所以它仍然保持undefined的值。
+使用let关键字（和const）声明的变量也会存在变量提升，但与var不同的是初始化没有被提升。 在我们声明（初始化）它们之前，它们是不可访问的。 这被称为“暂时死区”。 当我们在声明变量之前尝试访问变量时，JavaScript会抛出一个ReferenceError。
+</p>
+
+🌰关于let的是否存在变量提升  
+```js
+let name = 'banana'
+{
+  console.log(name) // Uncaught ReferenceError: name is not defined
+  let name = 'nana'
+}
+```  
+let变量如果不存在变量提升，console.log(name)就会输出banana，结果却抛出了ReferenceError，那么这很好的说明了，let也存在变量提升，但是它存在一个“暂时死区”，在变量未初始化或赋值前不允许访问。  
+
+变量的赋值可以分为三个阶段：  
+- 创建变量，在内存中开辟空间
+- 初始化变量，将变量初始化为undefined
+- 真正赋值  
+
+关于let、var和function：
+- let 的「创建」过程被提升了，但是初始化没有提升。
+- var 的「创建」和「初始化」都被提升了。
+- function 的「创建」「初始化」和「赋值」都被提升了。
+
+</details>
+
+### 二、选择题  
+
+### 三、实践题  
+
+[参考链接](https://juejin.im/post/5d0644976fb9a07ed064b0ca)
