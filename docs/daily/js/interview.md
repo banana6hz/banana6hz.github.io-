@@ -4,7 +4,7 @@
 
 ---
 ### 一、下面代码的输出是什么？ 
-1. 变量提升
+#### 1. 变量提升
 ```js
 function sayHi() {
   console.log(name);
@@ -42,8 +42,28 @@ let变量如果不存在变量提升，console.log(name)就会输出banana，结
 
 </details>
 
+---
+
+#### 2. 执行上下文
+```js
+var b = 123;
+if(true){
+    function b () {}
+    b = 333;
+    console.log(b,'?',window.b)
+}
+console.log(b,window.b)
+    
+```  
+<details><summary><b>?</b></summary>
+<p>是啥呢🐷</p>
+</details>
+
+---
+
 ### 二、选择题  
 
 ### 三、实践题  
 
 [参考链接](https://juejin.im/post/5d0644976fb9a07ed064b0ca)
+---
