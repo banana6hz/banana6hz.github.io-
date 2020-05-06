@@ -108,7 +108,7 @@ module.exports = {
 ```
 这个时候就可以运行`npm run biu`了， biu一下会发现出来了一个dist文件夹，如果boundle.js生成成功就说明打包成功啦🎉
 
-#### 二、实现打包图片和sass、less文件
+### 二、实现打包图片和sass、less文件
 
 👉 接下来试着打包一下图片和scss文件（同less文件）。先在src下新建images和styles文件夹。然后加入图片和样式文件，添加成功后的项目结构就像这样：
 ::: tip  
@@ -164,7 +164,7 @@ module.exports = {
 
 biu~ 成功之后就能在dist下面看到打包出来的图片啦
 
-#### 三、打包 html 文件
+### 三、打包 html 文件
 
 👉 添加 html-webpack-plugin，自动生成 index.html 的内容  
 修改 webpack.config.js
@@ -191,7 +191,7 @@ module.exports = {
     ],
 ```
 
-#### 四、配置本地服务器
+### 四、配置本地服务器
 👉 添加 webpack-dev-server，配置更友好的开发环境，在本地启动一个服务器  
 修改 package.json 里的 scripts,运行 `npm i webpack-dev-server -D` 
 ```js
@@ -211,7 +211,7 @@ devServer : {
 ```
 然后打开 http://0.0.0.0:8000/ 就能看到dist文件夹下面的index.html啦
 
-#### 五、配置router
+### 五、配置router
 👉 因为vue是单页面项目，页面之间都是通过路由管理器进行部分页面的显示与刷新（是这样说吗？？？）运行`npm i vue-router -D`,在src文件夹下新建router.js(配置路由页面)，新建components文件夹（放组件）,随便写一个组件，helloworld吧，hellowrold.vue吧,接下来进行router.js的配置
 ```js
 // router.js 配置项目路由
@@ -243,7 +243,7 @@ export default new Router({
 ```
 然后 `npm run dev` 一下可以在index页面看到helloworld的内容，就说明组件helloworld就挂上去啦  
 
-#### 六、添加 clean-webpack-plugin，每次 build 之前可以自动先清除输出文件夹  
+### 六、添加 clean-webpack-plugin，每次 build 之前可以自动先清除输出文件夹  
 `npm i clean-webpack-plugin --save-dev` ,在webpack.config.js添加如下代码
 ```js
     //webpack.config.js 基本配置
@@ -453,7 +453,7 @@ module.exports = merge(base, {
 "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.conf.js"
 ```
 
-#### 七、配置bable-loader  
+### 七、配置bable-loader  
 - webpack.config.js 添加module规则
 ```js
 {
@@ -501,7 +501,7 @@ const person = new Person("Ben", 28);
 person.sayHello();
 ```  
 
-#### 九、配置路径src
+### 八、配置路径src
 - webpack.base.conf.js  
 ```js
 

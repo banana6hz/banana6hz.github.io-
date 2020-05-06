@@ -10,11 +10,13 @@ module.exports = {
     },
     themeConfig: {
         sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
-        lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
+        // lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav:[
             { text: 'Blog', link: '/blog/guild' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
-            { text: 'debug',link: '/debug/css'}, 
+            // { text: 'Debug',link: '/debug/css'}, 
+            { text: 'Daily',link: '/daily/guild'},
+            { text: 'Interview',link: '/interview/js/interview01'},
             { text: 'Libraly', 
               items: [
                   { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
@@ -22,9 +24,8 @@ module.exports = {
                   { text: '设计导航', link:'http://hao.shejidaren.com/'},
                   { text: 'Typing', link:'https://www.keybr.com/'}
                 ]// 外部链接
-            }, 
-            { text: 'daily',link: '/daily/guild'},
-            { text: 'books',link: '/books/guild'},
+            },             
+            { text: 'Books',link: '/books/guild'},
             // 下拉列表
             { text: 'About Me',
               items: [
@@ -43,8 +44,8 @@ module.exports = {
                             title:'Git',
                             collapsable: true,
                             children: [
-                                ['/blog/tool/git/guild','Git指南'],
-                                ['/blog/tool/git/bug','踩坑记录']
+                                ['/blog/tool/git/guild','Git指南']
+                                // ['/blog/tool/git/bug','踩坑记录']
                             ]
                         },
                         {
@@ -102,7 +103,7 @@ module.exports = {
                             title:'Vue',
                             collapsable: true,
                             children: [
-                                ['/blog/vue/guild','Vue指南'],
+                                // ['/blog/vue/guild','Vue指南'],
                                 ['/blog/vue/mock','mock假数据'],
                                 ['/blog/vue/myvue','vue手动搭建']
                             ]
@@ -117,7 +118,7 @@ module.exports = {
                     ]
                 },
                 {
-                    title:'zaza',
+                    title:'实现',
                     collapsable: true,
                     children: [
                         {

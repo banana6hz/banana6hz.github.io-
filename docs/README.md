@@ -2,9 +2,9 @@
 home: true
 heroImage: /logo.jpg
 heroText: 👩‍💻
-tagline: Cogito Ergo Sum
-actionText: Banana
-actionLink: /guild/install
+tagline: Step by Step!
+actionText: Go ahead💨
+actionLink: /blog/guild
 features:
 - title: '📑 基础巩固'
   details: 不断学习、巩固自己的前端知识，形成自己的知识体系。
