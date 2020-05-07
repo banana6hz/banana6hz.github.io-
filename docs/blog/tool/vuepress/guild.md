@@ -126,13 +126,13 @@ footer: © 2020-present Six_Banana
 ---
 ```
 ![vuepress_2](../../../.vuepress/imgs/blog/tools/vuepress/vuepress_2.png)  
-### 三、部署到GIthub  
+### 三、部署到Github  
 :one: **配置base**  
 &emsp;① 如果你打算发布到 `https://<USERNAME>.github.io/`,base 设为 `base: "/"`。（ base 默认即是 "/"。）  
 &emsp;② 如果你打算发布到 `https://<USERNAME>.github.io/<REPO>/`（也就是说你的仓库在 `https://github.com/<USERNAME>/<REPO>`）,则将 base 设置为 `base: "/<REPO>/"`。  
-:two: **命令行推送**  
+:two: **命令行推送**  💢 需要注意的是推到线上的是dist文件夹里面的内容
 ```
-cd docs/.vuepress/dist //npm run build 将项目打包到dist文件夹，需要注意的是推到线上的是dist文件夹里面的内容（已经将md文件渲染成html文件）
+cd docs/.vuepress/dist //npm run build 将项目打包到dist文件夹，（已经将md文件渲染成html文件）
 git init 
 git add .
 git commit -m 'update'
@@ -192,6 +192,7 @@ cd -
 ├─ node_modules
 └─ package.json
 ```  
-💢💢💢 偶尔会出现这样的页面❌那就再build一次再push就好了     
-![vuepress_4.png](../../../.vuepress/imgs/blog/tools/vuepress/vuepress_4.png)
+💢💢 偶尔会出现这样的页面❌那就再build一次再push就好了     
+![vuepress_4.png](../../../.vuepress/imgs/blog/tools/vuepress/vuepress_4.png)  
+
 

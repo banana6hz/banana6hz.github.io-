@@ -37,6 +37,44 @@ module.exports = {
             // 侧边栏在 /blog/上
             '/blog/': [
                 {
+                    title:'基础',
+                    collapsable: true,
+                    children: [
+                        {
+                            title:'HTML',
+                            collapsable: true,
+                            children: [
+                                ['/blog/basic/html/guild','HTML指南']
+                            ]
+                        },
+                        {
+                            title:'CSS',
+                            collapsable: true,
+                            children: [
+                                ['/blog/basic/css/guild','css指南'],
+                                ['/blog/basic/css/flex','flex布局']
+                            ]
+                        },
+                        {
+                            title:'Javascript',
+                            collapsable: true,
+                            children: [
+                                ['/blog/basic/javascript/guild','js指南'],
+                                ['/blog/basic/javascript/browserRendering','浏览器渲染'],
+                                ['/blog/basic/javascript/event','js单线程'],
+                                ['/blog/basic/javascript/eventloop','js事件']
+                            ]
+                        },
+                        {
+                            title:'net',
+                            collapsable: true,
+                            children: [
+                                ['/blog/basic/net/guild','计算机网络'],
+                            ]
+                        }
+                    ]
+                },
+                {
                     title:'工具',
                     collapsable: true,
                     children: [
@@ -65,37 +103,6 @@ module.exports = {
                     ]
                 },
                 {
-                    title:'基础',
-                    collapsable: true,
-                    children: [
-                        {
-                            title:'HTML',
-                            collapsable: true,
-                            children: [
-                                ['/blog/basic/html/guild','HTML指南']
-                            ]
-                        },
-                        {
-                            title:'CSS',
-                            collapsable: true,
-                            children: [
-                                ['/blog/basic/css/guild','css指南'],
-                                ['/blog/basic/css/flex','flex布局']
-                            ]
-                        },
-                        {
-                            title:'Javascript',
-                            collapsable: true,
-                            children: [
-                                ['/blog/basic/javascript/guild','js指南'],
-                                ['/blog/basic/javascript/browserRendering','浏览器渲染'],
-                                ['/blog/basic/javascript/event','js单线程'],
-                                ['/blog/basic/javascript/eventloop','js事件']
-                            ]
-                        }
-                    ]
-                },
-                {
                     title:'框架',
                     collapsable: true,
                     children: [
@@ -105,7 +112,8 @@ module.exports = {
                             children: [
                                 // ['/blog/vue/guild','Vue指南'],
                                 ['/blog/vue/mock','mock假数据'],
-                                ['/blog/vue/myvue','vue手动搭建']
+                                ['/blog/vue/myvue','vue手动搭建'],
+                                ['/blog/vue/vuelife','vue生命周期']
                             ]
                         },
                         {
@@ -131,6 +139,7 @@ module.exports = {
                     ]
                 }
             ],
+            '/blog/basic/net': [],
             // 侧边栏在 /debug/ 上
             '/debug/': [
                 {
