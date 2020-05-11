@@ -34,6 +34,7 @@ Chrome 采用多进程架构,其顶层存在一个 Browser process 用以协调�
 ### 三、浏览器的主要进程和职责  
 
 ![浏览器主要进程](../../../.vuepress/imgs/blog/js/browserRender_2.png)
+错了错了，GUI应该是GPU...🐷
 
 ### 四、浏览器渲染进程
 

@@ -1,10 +1,10 @@
 ## HTTP协议
 HTTP协议——<u>超文本协议</u>，工作于客户端-服务端架构上，基于<u>TCP/IP</u>通讯协议来传递数据，所有的www文件都必须遵守这个标准。  
 - 无连接：每次只处理一个请求，服务器处理完客户的请求，并受到客户端的应答后，即断开连接
-- 无状态：无状态是指协议对事务处理没有记忆能力，处理本次事务时无法调取前面的信息，只能重传。
+- 无状态：无状态是指协议对事务处理没有记忆能力，自身不对请求和响应之间的通信状态进行保存, 处理本次事务时无法调取前面的信息，只能重传。
 
 ### 一、HTTP请求
-1. 🍗请求行  
+🍗**请求行**  
  `GET /image/logo.gif HTTP/1.1` (请求方法+URL+协议版本)  
 
 序号|方法|描述
@@ -19,10 +19,64 @@ HTTP协议——<u>超文本协议</u>，工作于客户端-服务端架构上�
 8| TRACE  |回显服务器收到的请求，主要用于测试或诊断
 9| PATCH  |是对 PUT 方法的补充，用来对已知资源进行局部更新 。
 
-2. 🍗首部  
-首部分为请求首部和响应首部，并且部分首部两种通用
+🍗**客户端请求消息**  
+客户端发送一个HTTP请求到服务器的请求消息包括以下格式：<u>请求行</u>（request line）、<u>请求头部</u>（header）、<u>空行</u>和<u>请求数据</u>四个部分组成  
+如图：  
+![http请求](../../../.vuepress/imgs/blog/net/http01.png)
 
-3. 🍗常见状态码
+🍗**服务器响应消息**
+HTTP响应也由四个部分组成，分别是：<u>状态行</u>、<u>消息报头</u>、<u>空行</u>和<u>响应正文</u>。
+![服务器响应](../../../.vuepress/imgs/blog/net/http02.png)
+```js
+//请求
+GET /hello.txt HTTP/1.1
+User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+Host: www.example.com
+Accept-Language: en, mi
+
+//响应
+HTTP/1.1 200 OK
+Date: Mon, 27 Jul 2009 12:28:53 GMT
+Server: Apache
+Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+ETag: "34aa387-d-1568eb00"
+Accept-Ranges: bytes
+Content-Length: 51
+Vary: Accept-Encoding
+Content-Type: text/plain
+
+//输出结果
+Hello World! My payload includes a trailing CRLF.
+```
+
+🍗**首部**  
+首部分为请求首部和响应首部，并且部分首部两种通用
+- **Request Header**
+```js
+GET /sample.Jsp HTTP/1.1  //请求行
+Host: www.uuid.online/  //请求的目标域名和端口号
+Origin: http://localhost:8081/  //请求的来源域名和端口号 （跨域请求时，浏览器会自动带上这个头信息）
+Referer: https:/localhost:8081/link?query=xxxxx  //请求资源的完整URI
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36 //浏览器信息
+Cookie: BAIDUID=FA89F036:FG=1; BD_HOME=1; sugstore=0  //当前域名下的Cookie
+Accept: text/html,image/apng  //代表客户端希望接受的数据类型是html或者是png图片类型 
+Accept-Encoding: gzip, deflate  //代表客户端能支持gzip和deflate格式的压缩
+Accept-Language: zh-CN,zh;q=0.9  //代表客户端可以支持语言zh-CN或者zh(值得一提的是q(0~1)是优先级权重的意思，不写默认为1，这里zh-CN是1，zh是0.9)
+Connection: keep-alive  //告诉服务器，客户端需要的tcp连接是一个长连接
+```
+- **Response Header**  
+```js
+HTTP/1.1 200 OK  // 响应状态行
+Date: Mon, 30 Jul 2018 02:50:55 GMT  //服务端发送资源时的服务器时间
+Expires: Wed, 31 Dec 1969 23:59:59 GMT //比较过时的一种验证缓存的方式，与浏览器（客户端）的时间比较，超过这个时间就不用缓存（不和服务器进行验证），适合版本比较稳定的网页
+Cache-Control:  no-cache  // 现在最多使用的控制缓存的方式，会和服务器进行缓存验证，具体见博文”Cache-Control“
+etag: "fb8ba2f80b1d324bb997cbe188f28187-ssl-df"  // 一般是Nginx静态服务器发来的静态文件签名，浏览在没有“Disabled cache”情况下，接收到etag后，同一个url第二次请求就会自动带上“If-None-Match”
+Last-Modified: Fri, 27 Jul 2018 11:04:55 GMT //是服务器发来的当前资源最后一次修改的时间，下次请求时，如果服务器上当前资源的修改时间大于这个时间，就返回新的资源内容
+Content-Type: text/html; charset=utf-8  //如果返回是流式的数据，我们就必须告诉浏览器这个头，不然浏览器会下载这个页面，同时告诉浏览器是utf8编码，否则可能出现乱码
+Content-Encoding: gzip  //告诉客户端，应该采用gzip对资源进行解码
+Connection: keep-alive  //告诉客户端服务器的tcp连接也是一个长连接
+```
+🍗**常见状态码**
 - 2XX：成功
 
 状态码|英文名称|中文含义

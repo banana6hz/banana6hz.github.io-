@@ -6,7 +6,7 @@ module.exports = {
     ],
     base: '/', // 这是部署到github相关的配置
     markdown: {
-        lineNumbers: true // 代码块显示行号
+        // lineNumbers: true // 代码块显示行号
     },
     themeConfig: {
         sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
@@ -15,8 +15,8 @@ module.exports = {
             { text: 'Blog', link: '/blog/guild' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
-            { text: 'Daily',link: '/daily/guild'},
-            { text: 'Interview',link: '/interview/js/interview01'},
+            { text: 'Debug',link: '/debug/css'},
+            { text: 'Interview',link: '/interview/guild'},
             { text: 'Libraly', 
               items: [
                   { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
@@ -61,8 +61,8 @@ module.exports = {
                             children: [
                                 ['/blog/basic/javascript/guild','js指南'],
                                 ['/blog/basic/javascript/browserRendering','浏览器渲染'],
-                                ['/blog/basic/javascript/event','js单线程'],
-                                ['/blog/basic/javascript/eventloop','js事件']
+                                // ['/blog/basic/javascript/event','js单线程'],
+                                ['/blog/basic/javascript/eventloop','js循环机制']
                             ]
                         },
                         {
@@ -181,29 +181,42 @@ module.exports = {
                     ]
                 },
             ],
-            '/daily/': [
+            // '/debug/': [
+            //     {
+            //         title:'js',
+            //         collapsable: true,
+            //         children: [
+            //             ['/debug/js/01','js']
+            //         ]
+            //     },
+            //     {
+            //         title:'css',
+            //         collapsable: true,
+            //         children: [
+            //             ['/debug/css/css', 'css']
+            //         ]
+            //     },
+            //     {
+            //         title:'net',
+            //         collapsable: true,
+            //         children: [
+            //             ['/debug/net/net', 'net'],
+            //         ]
+            //     },
+            // ],
+            '/interview/': [
                 {
-                    title:'js',
+                    title: 'interview',
                     collapsable: true,
                     children: [
-                        ['/daily/js/01','js']
+                        ['/interview/css/css01', 'CSS'],
+                        ['/interview/js/js01','Js'],
+                        ['/interview/vue/vue01','Vue'],
+                        ['/interview/es6/es6_01','Es6'],
+                        ['/interview/net/better','计算机网络']
                     ]
-                },
-                {
-                    title:'css',
-                    collapsable: true,
-                    children: [
-                        ['/daily/css/css', 'css']
-                    ]
-                },
-                {
-                    title:'net',
-                    collapsable: true,
-                    children: [
-                        ['/daily/net/net', 'net']
-                    ]
-                },
-            ]
+                }
+            ],
         }
     }
 }
