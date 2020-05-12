@@ -1,8 +1,8 @@
 ---
 home: true
-heroImage: /logo.jpg
-heroText: 👩‍💻
-tagline: Step by Step!
+heroImage: /banana_guitar.jpg
+heroText: Step by Step!
+tagline: 👩‍💻 
 actionText: Go ahead💨
 actionLink: /blog/guild
 features:
