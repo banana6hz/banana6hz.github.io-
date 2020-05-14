@@ -12,7 +12,7 @@ module.exports = {
         sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
         // lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav:[
-            { text: 'Blog', link: '/blog/guild' }, // 内部链接 以docs为根目录
+            { text: 'Blog', link: '/blog/basic/html/guild' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
             { text: 'Debug',link: '/debug/css'},
@@ -44,14 +44,14 @@ module.exports = {
                             title:'HTML',
                             collapsable: true,
                             children: [
-                                ['/blog/basic/html/guild','HTML指南']
+                                ['/blog/basic/html/guild','HTML基础']
                             ]
                         },
                         {
                             title:'CSS',
                             collapsable: true,
                             children: [
-                                ['/blog/basic/css/guild','css指南'],
+                                ['/blog/basic/css/guild','css基础'],
                                 ['/blog/basic/css/flex','flex布局']
                             ]
                         },
@@ -59,7 +59,7 @@ module.exports = {
                             title:'Javascript',
                             collapsable: true,
                             children: [
-                                ['/blog/basic/javascript/guild','js指南'],
+                                ['/blog/basic/javascript/guild','js基础'],
                                 ['/blog/basic/javascript/browserRendering','浏览器渲染'],
                                 // ['/blog/basic/javascript/event','js单线程'],
                                 ['/blog/basic/javascript/eventloop','js循环机制']
@@ -69,7 +69,9 @@ module.exports = {
                             title:'net',
                             collapsable: true,
                             children: [
-                                ['/blog/basic/net/guild','计算机网络'],
+                                ['/blog/basic/net/http','HTTP协议'],
+                                ['/blog/basic/net/tcp','TCP/IP协议'],
+                                ['/blog/basic/net/session_cookie','cookie与session'],
                             ]
                         }
                     ]
@@ -111,9 +113,9 @@ module.exports = {
                             collapsable: true,
                             children: [
                                 // ['/blog/vue/guild','Vue指南'],
-                                ['/blog/vue/mock','mock假数据'],
                                 ['/blog/vue/myvue','vue手动搭建'],
-                                ['/blog/vue/vuelife','vue生命周期']
+                                ['/blog/vue/vuelife','vue生命周期'],
+                                ['/blog/vue/mock','mock假数据']
                             ]
                         },
                         {
@@ -129,17 +131,10 @@ module.exports = {
                     title:'实现',
                     collapsable: true,
                     children: [
-                        {
-                            title:'zaza',
-                            collapsable: true,
-                            children: [
-                                ['/blog/zaza/center','水平垂直居中']
-                            ]
-                        },
+                        ['/blog/zaza/center','水平垂直居中'],
                     ]
                 }
             ],
-            '/blog/basic/net': [],
             // 侧边栏在 /debug/ 上
             '/debug/': [
                 {
@@ -213,7 +208,13 @@ module.exports = {
                         ['/interview/js/js01','Js'],
                         ['/interview/vue/vue01','Vue'],
                         ['/interview/es6/es6_01','Es6'],
-                        ['/interview/net/better','计算机网络']
+                        {
+                            title:'计算机网络',
+                            collapsable: true,
+                            children: [
+                                ['/interview/net/url','输入URL到页面渲染出来，浏览器经历了什么？']
+                            ]
+                        },
                     ]
                 }
             ],
