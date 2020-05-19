@@ -95,7 +95,7 @@ alert(person1.sayName()==person2.sayName())//true
 Person.prototype.constructor == Person 
 // **准则1：原型对象（即Person.prototype）的constructor指向构造函数本身**
 person1.__proto__ == Person.prototype 
-// **准则2：实例（即person1）的__proto__和原型属性指向同一个地方**
+// **准则2：实例（即person1）的__proto__和原型对象指向同一个地方**
 ```
 👉再来看看这张经典图  
 ![prototype](../../../.vuepress/imgs/blog/js/prototype02.png)
@@ -105,20 +105,30 @@ function Foo(){};
 let f1 = new Foo();
 let f2 = new Foo();
 f1._proto_ = Foo.prototype;
-f2._proto_ = Foo.prototype;
-Foo.prototype._proto_ = Object.prototype
-Object.prototype._proto_ = null//原型链到此结束
+Foo.prototype._proto_ = Object.prototype;
+Object.prototype._proto_ = null;// 原型链到此停止
 
-Foo.prototype.constructor = Foo
-Foo._proto_ = Function.prototype
-Function.prototype._proto_ = Object.prototype
-Object.prototype._proto_ = null//原型链到此结束
+f1.prototype.constructor = Foo;
+Foo._proto_ = Function.prototype;
+Function.prototype._proto_ = Object.prototype;
+Object.prototype._proto_ = null;// 原型链到此停止
+// **此处注意Foo 和 Function的区别， Foo是 Function的实例**
+
 // 从中间 Function Object()开始分析这一张经典之图
-
-
+function Object(){};
+let o1 = new Object();
+let o2 = new Object();
+o1._proto_ = Object.prototype;
+Object.prototype._proto_ = null;
+Object.prototype.constructor = Object;
+Object._proto_ = Function.prototype;
+Function.prototype._proto_ = Object.prototype;
+Object.prototype._proto_ = null;
 
 // 从下方 Function Function()开始分析这一张经典之图
-
+Function Function();
+Function._proto_ = Object.prototype;
+Object.prototype._proto_ = null;
 ```
 
 👉来看看原型模式如何创建对象
@@ -155,7 +165,8 @@ Person.prototype = function(){
 
 原型与原型层层相链接的过程即为原型链。
 
-
+原型、原型链的意思何在？原型对象的作用，是用来存放实例中共有的那部份属性、方法，可以大大减少内存消耗。  
+加入我们创建不同的中国人，他们有不同的名字，不同的年龄，但是他们有共同的肤色，共同的头发，肤色和头发就是实例们共有属性，可以通过原型去访问，而不用在每一个实例上都创建这些属性。
 
 
 ## 闭包  

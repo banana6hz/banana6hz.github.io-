@@ -1,26 +1,43 @@
-## 来看看 COOKIE和SESSION有什么区别   
+## 来看看cookie和session localStorage和sessionStrorage
 
-**Cookie**:Cookie技术通过在请求和响应报文中写入Cookie信息来控制客户端的状态。  
-Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。通常，它用于告知服务端两个请求是否来自同一浏览器， 
+首先，因为HTTP连接是无状态的，不会储存信息，但在实际的应用中，我们需要跟踪浏览器de 用户身份，如储存登录信息。所以就有了它们。
 
-**Session**:客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找该客户的状态就可以了。
+👉**Cookie**：储存在用户本地终端上的数据。将数据保存在用户的客户端，存在于用户硬盘文件上。   
+
+Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。通常，它用于告知服务端两个请求是否来自同一浏览器。  
+
+👉**Session**：Session对象存储特定用户会话所需的属性及配置信息，一旦关闭浏览器，所有数据都会消失。
+
+当服务器收到请求需要创建session对象时，首先会检查客户端请求中是否包含sessionid。如果有sessionid，服务器将根据该id返回对应session对象。如果客户端请求中没有sessionid，服务器会创建新的session对象，并把sessionid在本次响应中返回给客户端。通常使用cookie方式存储sessionid到客户端，在交互中浏览器按照规则将sessionid发送给服务器。如果用户禁用cookie，则要使用URL重写，可以通过response.encodeURL(url) 进行实现；API对encodeURL的结束为，当浏览器支持Cookie时，url不做任何处理；当浏览器不支持Cookie的时候，将会重写URL将SessionID拼接到访问地址后。
 
 ![图示](../../../.vuepress/imgs/blog/net/cookie_session01.png)
 
-**区别**  
-- 存储位置不同
-   + cookie是储存到客户端的
-   + session是储存到服务器端的
-- 存储不同  
-   + Cookie 只能保存 ASCII，单个cookie保存的数据<=4KB，一个站点最多保存20个Cookie。
-   + Session 可以存任意数据类型。对于session来说并没有上限，但出于对服务器端的性能考虑，session内不要存放过多的东西，并且设置session删除机制。
-- 有效期上不同
-   + 开发可以通过设置cookie的属性，达到使cookie长期有效的效果。比如我们经常使用的默认登录功能。
-   + session依赖于名为JSESSIONID的cookie，Session一般失效时间较短，客户端关闭或者Session 超时都会失效。  
-- 隐私策略不同
-   + cookie对客户端是可见的，别有用心的人可以分析存放在本地的cookie并进行cookie欺骗，所以它是不安全的。
-   + session存储在服务器上，安全性相对 Cookie 要好一些。
-- 跨域支持上不同
-   + cookie支持跨域名访问。
-   + session不支持跨域名访问。
+来看看这两者的区别：
+区别|cookie|session
+:--:|:--:|:--:
+存储位置|客户端|服务器端
+大小    |一个站点<=4kb，最多20个站点|无上限
+数据类型|只能保存ASCII|任意数据类型
+有效期|如未设置过期时间，则到浏览器关闭|？
+跨域名访问|可|不可
+安全性|对客户端是可见的，别有用心的人可以分析存放在本地的cookie并进行cookie欺骗|存储在服务器上，安全性相对 Cookie 要好一些。
+
+应用
+- cookie
+   + 判断用户是否登陆过网站，以便下次登录时能够实现自动登录（或者记住密码）
+   + 保存上次登录的时间等信息。
+   + 保存上次浏览的页面
+   + 浏览计数
+- session:用于保存每个用户的专用信息，变量的值保存在服务器端，通过SessionID来区分不同的客户
+   + 网上商城中的购物车
+   + 保存用户登录信息
+   + 将某些数据放入session中，供同一用户的不同页面使用
+
+Cookie存储机制是HTML4的，他有很多的缺点和局限性，所以在HTML5中，推出了新的存储机制Web Strorage，这它分为以下两种：  
+
+👉**localStorage（本地存储）**：该对象可将数据长期保存在客户端，即使是重新打开浏览器也不会丢失，如果要清除对象保存内容，需调用localStorage.removeItem(key)。localStorage.setItem(key,value); localStorage.getItem(key);
+localStorage.clear()清楚全部的数据localStorage在所有同源窗口中共享；
+
+👉**sessionStrorage（会话存储）**：该数据实质上是被保存在session对象中。保存用户临时会话数据；一旦关闭浏览器，所有数据都会消失。sessionStorage不在不同浏览器窗口中共享
+
 
