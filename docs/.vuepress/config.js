@@ -61,7 +61,7 @@ module.exports = {
                             children: [
                                 ['/blog/basic/javascript/guild','js基础'],
                                 ['/blog/basic/javascript/browserRendering','浏览器渲染'],
-                                // ['/blog/basic/javascript/event','js单线程'],
+                                ['/blog/basic/javascript/event','事件'],
                                 ['/blog/basic/javascript/eventloop','js循环机制']
                             ]
                         },
@@ -212,7 +212,8 @@ module.exports = {
                             title:'计算机网络',
                             collapsable: true,
                             children: [
-                                ['/interview/net/url','输入URL到页面渲染出来，浏览器经历了什么？']
+                                ['/interview/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
+                                ['/interview/net/better','什么是跨域？']
                             ]
                         },
                     ]

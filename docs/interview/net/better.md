@@ -41,11 +41,50 @@ http://www.a.com/b.js        |不同域名 |不允许
   - Ajax请求发送不出去 
 
 ### 跨域的解决方法  
-#### JSONP  
-像img、script等带有src属性的标签是没有跨域限制的，所以我们可以动态创建script标签，通过src属性来进行跨域请求的来源  
-可参考<https://blog.csdn.net/hansexploration/article/details/80314948>
+#### 🤜 JSONP  
+像img、script等带有src属性的标签是没有跨域限制的，所以我们可以动态创建script标签，通过src属性来进行跨域请求的来源,再用一个回调函数处理数据，但只能用于GET。  
+- 使用script标签发送请求
+- 在src给服务器传递一个callback
+- callback 的值对应到页面一定要定义一个全局函数（为什么是全局？因为服务端接收到callback函数后会返回页面中的script中去找，如果不写在全局作用域中根本找不到）
+- 服务端返回的是一个<u>函数的调用</u>。调用的时候会吧数据作为参数包在这个函数里面。
 
-#### CORS(跨域资源共享)  
+```js
+//动态创建script
+var url = "http://banana6hz.com/jsonp?callback=showData";
+var script = document.createElement('script');
+script.setAttribute('src', url);
+//向头部输入一个脚本，该脚本发起一个跨域请求
+document.getElementsByTagName('head')[0].appendChild(script); 
+<script type="text/javascript">
+  //回调函数
+  function showDate(result){
+    console.log(result);
+  }
+</script>
+```
+再来看看jQuery如何实现jsonp调用
+```js
+<script type="text/javascript">
+jQuery(document).ready(function(){ 
+  $.ajax({
+  type:"get",
+  async:false,
+  url:"",
+  dataType:"jsonp",
+  jsonp:"callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+  jsonCallback:"showDate",//自定义的jsonp回调函数名
+  success:function(json){
+    //对请求到的数据进行处理
+    console.log(jsonp)
+  },
+  error:function(){
+    alert('error')
+  }
+});
+</script>
+```
+
+#### 🤜 CORS(跨域资源共享)  
 W3C推出的了一个标准----"跨域资源共享"（Cross-origin resource sharing），简称CORS。该标准定义了跨域访问资源时服务器和浏览器怎么通信。通俗讲就是浏览器在发现跨域请求的时候会附加一些头信息和服务器进行沟通，来确定跨域请求通不通过。现在除IE10以下的浏览器都支持这个标准。  
 浏览器会把跨域请求分成两类：简单和非简单请求。
 - 简单请求：post、get、head   
@@ -61,6 +100,6 @@ Referer: http://foo.example/examples/access-control/simpleXSInvocation.html
 Origin: http://foo.example
 
 
-#### postMessage
+#### 🤜 postMessage
 
  
