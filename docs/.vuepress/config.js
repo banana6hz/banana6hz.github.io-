@@ -12,20 +12,21 @@ module.exports = {
         sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
         // lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav:[
-            { text: 'Blog', link: '/blog/basic/html/guild' }, // 内部链接 以docs为根目录
+            { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
-            { text: 'Debug',link: '/debug/css'},
-            { text: 'Interview',link: '/interview/guild'},
+            { text: 'Everyday',link: '/everyday/guild'},
+            { text: 'Daliy',link: '/daliy/guild'},
             { text: 'Libraly', 
               items: [
-                  { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
-                  { text: '在线工具', link:'https://tool.oschina.net/commons'},
-                  { text: '设计导航', link:'http://hao.shejidaren.com/'},
-                  { text: 'Typing', link:'https://www.keybr.com/'}
+                { text: '腾讯前端团队', link:'http://www.alloyteam.com/page/0/'},
+                { text: '淘宝前端团队', link:'https://fed.taobao.org/'},
+                { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
+                { text: '在线工具', link:'https://tool.oschina.net/commons'},
+                { text: '设计导航', link:'http://hao.shejidaren.com/'},
+                { text: 'Typing', link:'https://www.keybr.com/'}
                 ]// 外部链接
-            },             
-            { text: 'Books',link: '/books/guild'},
+            },            
             // 下拉列表
             { text: 'About Me',
               items: [
@@ -36,6 +37,7 @@ module.exports = {
         sidebar: {
             // 侧边栏在 /blog/上
             '/blog/': [
+                ['/blog/basic/mind','我的前端'],
                 {
                     title:'基础',
                     collapsable: true,
@@ -136,26 +138,26 @@ module.exports = {
                 }
             ],
             // 侧边栏在 /debug/ 上
-            '/debug/': [
+            '/daliy/': [
                 {
                     title: 'css', 
                     collapsable: true,
                     children: [
-                        [ '/debug/css','css']
+                        [ '/daliy/css/css','css']
                     ]
                 },
                 { 
                     title: 'js', 
                     collapsable: true,
                     children: [
-                        [ '/debug/js','js']
+                        [ '/daliy/js/js','js']
                     ]
                 },
                 { 
                     title: 'net', 
                     collapsable: true,
                     children: [
-                        [ '/debug/net','net']
+                        [ '/daliy/net/net','net']
                     ]
                 }
             ],
@@ -199,21 +201,21 @@ module.exports = {
             //         ]
             //     },
             // ],
-            '/interview/': [
+            '/everyday/': [
                 {
-                    title: 'interview',
-                    collapsable: true,
+                    title: 'Everyday',
+                    collapsable: false,
                     children: [
-                        ['/interview/css/css01', 'CSS'],
-                        ['/interview/js/js01','Js'],
-                        ['/interview/vue/vue01','Vue'],
-                        ['/interview/es6/es6_01','Es6'],
+                        ['/everyday/js/js01','JS'],
+                        ['/everyday/css/css01', 'CSS'],   
+                        ['/everyday/vue/vue01','Vue'],
+                        ['/everyday/es6/es6_01','Es6'],
                         {
                             title:'计算机网络',
                             collapsable: true,
                             children: [
-                                ['/interview/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
-                                ['/interview/net/better','什么是跨域？']
+                                ['/everyday/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
+                                ['/everyday/net/kuayu','浏览器跨域'],
                             ]
                         },
                     ]

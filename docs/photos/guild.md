@@ -1,2 +1,2 @@
 :camera:
-![photo](../photo_guild.jpg)
+![photo](../.vuepress/imgs/common/photo_guild.jpg)

@@ -4,7 +4,7 @@ heroImage: /banana_guitar.jpg
 heroText: Step by Step!
 tagline: 👩‍💻 
 actionText: Go ahead💨
-actionLink: /blog/basic/html/guild
+actionLink: /blog/basic/mind
 features:
 - title: '📑 基础巩固'
   details: 不断学习、巩固自己的前端知识，形成自己的知识体系。

@@ -1,21 +1,3 @@
-# 计算机网络
-## 前端性能优化
-了解如何优化前端的性能，可以尽可能地减少页面加载的时间，为用户提供更好的用户体验。下面来学习一下可以从哪些方面入手吧！  
-借用一下网上的一张图  
-![vue-for](../../.vuepress/imgs/interview/net/better.png)  
-
-一、页面内容  
-1. 减少HTTP请求数
-- 使用CSS精灵图
-- JS/CSS压缩和模块打包
-- 行内图片（Base64编码）  
-2. 减少DNS查询次数
-- 一个网站里面使用至少2个域，但不多于4个域来提供资源
-3. 延迟加载  
-- 图片懒加载
-
-
-
 ## 浏览器跨域解决方案  
 ### 什么是跨域  
 当一个请求url的：**协议**、**域名**、**端口**三者之间任意一个与当前地址不同的时候，就是跨域
@@ -40,8 +22,8 @@ http://www.a.com/b.js        |不同域名 |不允许
   - DOM 和 JS 对象无法获取（操作）
   - Ajax请求发送不出去 
 
-### 跨域的解决方法  
-#### 🤜 JSONP  
+
+### 🤜 解决方法——JSONP  
 像img、script等带有src属性的标签是没有跨域限制的，所以我们可以动态创建script标签，通过src属性来进行跨域请求的来源,再用一个回调函数处理数据，但只能用于GET。  
 - 使用script标签发送请求
 - 在src给服务器传递一个callback
@@ -84,22 +66,73 @@ jQuery(document).ready(function(){
 </script>
 ```
 
-#### 🤜 CORS(跨域资源共享)  
-W3C推出的了一个标准----"跨域资源共享"（Cross-origin resource sharing），简称CORS。该标准定义了跨域访问资源时服务器和浏览器怎么通信。通俗讲就是浏览器在发现跨域请求的时候会附加一些头信息和服务器进行沟通，来确定跨域请求通不通过。现在除IE10以下的浏览器都支持这个标准。  
-浏览器会把跨域请求分成两类：简单和非简单请求。
-- 简单请求：post、get、head   
->GET /resources/public-data/ HTTP/1.1
-Host: bar.other
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Accept-Language: en-us,en;q=0.5
-Accept-Encoding: gzip,deflate
-Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
-Connection: keep-alive
-Referer: http://foo.example/examples/access-control/simpleXSInvocation.html
-Origin: http://foo.example
-
-
-#### 🤜 postMessage
-
+### 🤜 解决方法——CORS(跨域资源共享)  
+W3C推出的了一个标准----"跨域资源共享"（Cross-origin resource sharing），简称CORS。该标准定义了跨域访问资源时服务器和浏览器怎么通信。
  
+**实现原理**：浏览器一旦发现跨越请求，就会自动添加一些头信息和服务器进行沟通，来确定跨域请求通不通过。
+
+现在除IE10以下的浏览器都支持这个标准。  
+
+服务器设置Access-Control-Allow-Origin就可以开启CORS。该属性表示那些域名可以访问资源。如果设置通配符则表示所有网站都可以访问资源。 
+   
+浏览器会把跨域请求分成两类：简单和非简单请求。
+- 简单请求
+   + 请求方法为：<u>post、get、head</u>   
+   + Content-Type的值仅限为以下三种之一:`text/plain` `multipart/form-data` `application/x-www-form-urlencoded`
+
+- 复杂请求：除简单请求以外的其他请求  
+
+**实现方法**  
+- 简单请求  
+   + 浏览器发出CORS请求，在头信息添加Origin字段，字段说明本次请求来自哪个源（协议+端口+域名）
+   + 服务器判断Origin指定的源在不在许可范围内。
+      - 如果在，服务器返回的响应，会多出几个头部信息。
+      ```js
+      Access-Control-Allow-Origin: http://banana.com 
+      //值为Orign字段的值，或者*,表示接受任何域名的请求
+      Access-Control-Allow-Credentials: true 
+      //布尔值，表示是否允许浏览器发送cookie给服务器
+      Access-Control-Expose-Headers: FooBar 
+      //表示可以通过getResponseHeader('FooBar')获FooBar字段的值
+      Content-Type: text/html; charset=utf-8
+      ```
+      - 如果不在，服务前返回一个正常的HTTP响应，浏览器发现回应的头部信息里没有Access-Control-Allow-Orign字段，抛出错误。
+
+- 复杂请求：复杂请求的CORS请求，会在正式通信之前，增加一次HTTP查询请求，称为"预检"请求。  
+   + 浏览器先询问服务器，当前网页所在的域名是否在服务器的许可名单之中，以及可以使用哪些HTTP动词和头信息字段。
+   ```js
+   //浏览器js脚本
+    var url = 'http://banana.com/cors';
+    var xhr = new XMLHttpRequest();
+    xhr.open('PUT', url, true);
+    xhr.setRequestHeader('X-Custom-Header', 'value');
+    xhr.send();
+
+    //浏览器发出预检请求
+    OPTIONS /cors HTTP/1.1 //Option表示这个请求是用来询问的
+    Origin: http://banana.com
+    Access-Control-Request-Method: PUT
+    Access-Control-Request-Headers: X-Custom-Header
+    Host: banana.com
+    Accept-Language: en-US
+    Connection: keep-alive
+    User-Agent: Mozilla/5.0...
+   ```
+
+    - 肯定答复，浏览器发出正式的XMLHttpRequest请求
+    - 拒绝，报错
+    ```js
+    XMLHttpRequest cannot load http://banana.com.
+    Origin http://banana.com is not allowed by Access-Control-Allow-Origin.
+    ```
+
+### 🤜 解决方法——document.domain  
+该方法只能只用于**二级域名相同的情况下**。
+```js
+'a.banana.com`
+`b.nanana.com`
+document.domain = banana.com
+这样他们就可以跨域访问数据了
+```  
+
+### 🤜 解决方法——postMessage
