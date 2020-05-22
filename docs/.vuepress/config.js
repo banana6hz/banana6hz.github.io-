@@ -15,8 +15,8 @@ module.exports = {
             { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
-            { text: 'Everyday',link: '/everyday/guild'},
-            { text: 'Daliy',link: '/daliy/guild'},
+            { text: 'Exercises',link: '/exercises/js/js01'},
+            { text: 'Daily',link: '/daily/guild'},
             { text: 'Libraly', 
               items: [
                 { text: '腾讯前端团队', link:'http://www.alloyteam.com/page/0/'},
@@ -128,36 +128,36 @@ module.exports = {
                             ]
                         }
                     ]
-                },
-                {
-                    title:'实现',
-                    collapsable: true,
-                    children: [
-                        ['/blog/zaza/center','水平垂直居中'],
-                    ]
                 }
+                // {
+                //     title:'实现',
+                //     collapsable: true,
+                //     children: [
+                //         ['/blog/zaza/center','水平垂直居中'],
+                //     ]
+                // }
             ],
             // 侧边栏在 /debug/ 上
-            '/daliy/': [
+            '/daily/': [
                 {
                     title: 'css', 
                     collapsable: true,
                     children: [
-                        [ '/daliy/css/css','css']
+                        [ '/daily/css/css','css']
                     ]
                 },
                 { 
                     title: 'js', 
                     collapsable: true,
                     children: [
-                        [ '/daliy/js/js','js']
+                        [ '/daily/js/01','js']
                     ]
                 },
                 { 
                     title: 'net', 
                     collapsable: true,
                     children: [
-                        [ '/daliy/net/net','net']
+                        [ '/daily/net/net','net']
                     ]
                 }
             ],
@@ -201,21 +201,21 @@ module.exports = {
             //         ]
             //     },
             // ],
-            '/everyday/': [
+            '/exercises/': [
                 {
-                    title: 'Everyday',
+                    title: 'Exercises',
                     collapsable: false,
                     children: [
-                        ['/everyday/js/js01','JS'],
-                        ['/everyday/css/css01', 'CSS'],   
-                        ['/everyday/vue/vue01','Vue'],
-                        ['/everyday/es6/es6_01','Es6'],
+                        ['/exercises/js/js01','JS'],
+                        ['/exercises/css/css01', 'CSS'],   
+                        ['/exercises/vue/vue01','Vue'],
+                        ['/exercises/es6/es6_01','Es6'],
                         {
                             title:'计算机网络',
                             collapsable: true,
                             children: [
-                                ['/everyday/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
-                                ['/everyday/net/kuayu','浏览器跨域'],
+                                ['/exercises/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
+                                ['/exercises/net/kuayu','浏览器跨域'],
                             ]
                         },
                     ]
