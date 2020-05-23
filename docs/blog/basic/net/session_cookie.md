@@ -37,7 +37,7 @@ Cookie存储机制是HTML4的，他有很多的缺点和局限性，所以在HTM
 
 👉**localStorage（本地存储）**：该对象可将数据长期保存在客户端，即使是重新打开浏览器也不会丢失。  
 如果要清除对象保存内容，需调用localStorage.removeItem(key)。localStorage.setItem(key,value); localStorage.getItem(key);
-localStorage.clear()清楚全部的数据localStorage在所有同源窗口中共享；
+localStorage.clear()清楚全部的数据,localStorage在所有同源窗口中共享；
 
 👉**sessionStrorage（会话存储）**：保存用户临时会话数据；一旦关闭浏览器，所有数据都会消失。sessionStorage不在不同浏览器窗口中共享
 

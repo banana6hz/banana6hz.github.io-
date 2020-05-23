@@ -42,13 +42,7 @@ module.exports = {
                     title:'基础',
                     collapsable: true,
                     children: [
-                        {
-                            title:'HTML',
-                            collapsable: true,
-                            children: [
-                                ['/blog/basic/html/guild','HTML基础']
-                            ]
-                        },
+                        ['/blog/basic/html/guild','HTML基础'],
                         {
                             title:'CSS',
                             collapsable: true,
