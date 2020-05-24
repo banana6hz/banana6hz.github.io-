@@ -108,7 +108,7 @@ module.exports = {
                             title:'Vue',
                             collapsable: true,
                             children: [
-                                // ['/blog/vue/guild','Vue指南'],
+                                ['/blog/vue/guild','Vue指南'],
                                 ['/blog/vue/myvue','vue手动搭建'],
                                 ['/blog/vue/vuelife','vue生命周期'],
                                 ['/blog/vue/mock','mock假数据']
@@ -120,7 +120,8 @@ module.exports = {
                             children: [
                                 ['/blog/koa/koaGuild','koa指南']
                             ]
-                        }
+                        },
+                        ['/blog/wxapp/guild','微信小程序']
                     ]
                 }
                 // {
