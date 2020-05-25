@@ -15,8 +15,8 @@ module.exports = {
             { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
-            { text: 'Exercises',link: '/exercises/js/js01'},
-            { text: 'Daily',link: '/daily/guild'},
+            { text: 'Question',link: '/question/js/js01'},
+            { text: 'Debug',link: '/debug/guild'},
             { text: 'Libraly', 
               items: [
                 { text: '腾讯前端团队', link:'http://www.alloyteam.com/page/0/'},
@@ -24,7 +24,7 @@ module.exports = {
                 { text: 'Emoji', link:'https://www.webfx.com/tools/emoji-cheat-sheet/'},
                 { text: '在线工具', link:'https://tool.oschina.net/commons'},
                 { text: '设计导航', link:'http://hao.shejidaren.com/'},
-                { text: 'Typing', link:'https://www.keybr.com/'}
+                { text: 'Typing', link:'https://www.keybr.com/'},
                 ]// 外部链接
             },            
             // 下拉列表
@@ -55,14 +55,14 @@ module.exports = {
                             title:'Javascript',
                             collapsable: true,
                             children: [
-                                ['/blog/basic/javascript/guild','js基础'],
+                                ['/blog/basic/javascript/guild','JS基础'],
                                 ['/blog/basic/javascript/browserRendering','浏览器渲染'],
                                 ['/blog/basic/javascript/event','事件'],
                                 ['/blog/basic/javascript/eventloop','js循环机制']
                             ]
                         },
                         {
-                            title:'net',
+                            title:'NET',
                             collapsable: true,
                             children: [
                                 ['/blog/basic/net/http','HTTP协议'],
@@ -132,29 +132,31 @@ module.exports = {
                 //     ]
                 // }
             ],
-            // 侧边栏在 /debug/ 上
-            '/daily/': [
+            '/question/': [
                 {
-                    title: 'css', 
-                    collapsable: true,
+                    title: 'Question',
+                    collapsable: false,
                     children: [
-                        [ '/daily/css/css','css']
-                    ]
-                },
-                { 
-                    title: 'js', 
-                    collapsable: true,
-                    children: [
-                        [ '/daily/js/01','js']
-                    ]
-                },
-                { 
-                    title: 'net', 
-                    collapsable: true,
-                    children: [
-                        [ '/daily/net/net','net']
+                        ['/question/js/js01','JS'],
+                        ['/question/css/css01', 'CSS'],   
+                        ['/question/vue/vue01','vue'],
+                        ['/question/es6/es6_01','ES6'],
+                        {
+                            title:'计算机网络',
+                            collapsable: true,
+                            children: [
+                                ['/question/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
+                                ['/question/net/kuayu','浏览器跨域'],
+                            ]
+                        },
                     ]
                 }
+            ],
+            // 侧边栏在 /debug/ 上
+            '/debug/': [
+                ['/debug/js','JS'],
+                ['/debug/css', 'CSS'],
+                ['/debug/net', 'NET']
             ],
             // 侧边栏在 /photos/ 上
             '/photos/': [
@@ -172,49 +174,6 @@ module.exports = {
                         ['/photos/eat', 'eat']
                     ]
                 },
-            ],
-            // '/debug/': [
-            //     {
-            //         title:'js',
-            //         collapsable: true,
-            //         children: [
-            //             ['/debug/js/01','js']
-            //         ]
-            //     },
-            //     {
-            //         title:'css',
-            //         collapsable: true,
-            //         children: [
-            //             ['/debug/css/css', 'css']
-            //         ]
-            //     },
-            //     {
-            //         title:'net',
-            //         collapsable: true,
-            //         children: [
-            //             ['/debug/net/net', 'net'],
-            //         ]
-            //     },
-            // ],
-            '/exercises/': [
-                {
-                    title: 'Exercises',
-                    collapsable: false,
-                    children: [
-                        ['/exercises/js/js01','JS'],
-                        ['/exercises/css/css01', 'CSS'],   
-                        ['/exercises/vue/vue01','Vue'],
-                        ['/exercises/es6/es6_01','Es6'],
-                        {
-                            title:'计算机网络',
-                            collapsable: true,
-                            children: [
-                                ['/exercises/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
-                                ['/exercises/net/kuayu','浏览器跨域'],
-                            ]
-                        },
-                    ]
-                }
             ],
         }
     }
