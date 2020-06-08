@@ -35,3 +35,25 @@ onUnload()<font color="#425fe">(cur)</font> => onShow()<font color="#425fe">(pre
 **页面返回**:  `navigateBack` 或 `<navigator open-type="navigateBack">` 或用户按左上角返回按钮  
 
 **重启动**: `wx.reLaunch` 或  `<navigator open-type="reLaunch"/> ` 
+
+## 小程序下拉更新怎么实现  
+- 在json文件添加以下代码
+```js
+{
+    "enablePullDownRefresh": true;
+
+}
+```
+- 在需要实现下拉更新的页面中写入函数
+```js
+onPullDownRefresh:function(){
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    //模拟加载
+    setTimeout(function()
+      {
+        // complete
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+        },1500);
+    },
+```

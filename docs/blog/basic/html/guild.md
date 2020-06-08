@@ -24,3 +24,6 @@ HTML5 是最新的 HTML 标准。
 - 兼容性
    - import是CSS2.1 提出的，只在IE5以上才能被识别，
    - 而link是XHTML标签，无兼容问题;  
+
+## Web worker
+Web Worker 是HTML5标准的一部分，这一规范定义了一套 API，它允许一段JavaScript程序运行在主线程之外的另外一个线程中。

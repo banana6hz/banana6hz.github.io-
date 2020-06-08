@@ -58,7 +58,8 @@ module.exports = {
                                 ['/blog/basic/javascript/guild','JS基础'],
                                 ['/blog/basic/javascript/browserRendering','浏览器渲染'],
                                 ['/blog/basic/javascript/event','事件'],
-                                ['/blog/basic/javascript/eventloop','js循环机制']
+                                ['/blog/basic/javascript/eventloop','js循环机制'],
+                                ['/blog/basic/javascript/es6','ES6']
                             ]
                         },
                         {
