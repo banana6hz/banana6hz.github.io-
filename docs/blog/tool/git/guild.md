@@ -148,3 +148,14 @@ git stash pop
 git fetch是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。  
 而git pull 则是将远程主机的最新内容拉下来后直接合并。  
 即：git pull = git fetch + git merge，这样可能会产生冲突，需要手动解决。
+
+## 如何解决冲突
+- 手动解决: Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容，选择要保留的部分即可
+```js
+// Git tracks changes of files.
+// <<<<<<< HEAD
+// Creating a new branch is quick & simple.
+// =======
+// Creating a new branch is quick AND simple.
+// >>>>>>> feature1
+```

@@ -48,14 +48,16 @@ module.exports = {
                             collapsable: true,
                             children: [
                                 ['/blog/basic/css/guild','css基础'],
-                                ['/blog/basic/css/flex','flex布局']
+                                ['/blog/basic/css/flex','flex布局'],
+                                ['/blog/basic/css/z-index','深入理解z-index']
                             ]
                         },
                         {
-                            title:'Javascript',
+                            title:'JavaScript',
                             collapsable: true,
                             children: [
                                 ['/blog/basic/javascript/guild','JS基础'],
+                                ['/blog/basic/javascript/caozuofu','操作符'],
                                 ['/blog/basic/javascript/browserRendering','浏览器渲染'],
                                 ['/blog/basic/javascript/event','事件'],
                                 ['/blog/basic/javascript/eventloop','js循环机制'],
@@ -63,9 +65,10 @@ module.exports = {
                             ]
                         },
                         {
-                            title:'NET',
+                            title:'网络/浏览器',
                             collapsable: true,
                             children: [
+                                ['/blog/basic/net/guild','网络'],
                                 ['/blog/basic/net/http','HTTP协议'],
                                 ['/blog/basic/net/tcp','TCP/IP协议'],
                                 ['/blog/basic/net/session_cookie','cookie与session'],
@@ -73,58 +76,42 @@ module.exports = {
                         }
                     ]
                 },
+                ['/blog/jquery/guild','jQuery'],
+                {
+                    title:'VUE',
+                    collapsable: true,
+                    children: [
+                        ['/blog/vue/guild','Vue指南'],
+                        ['/blog/vue/myvue','vue手动搭建'],
+                        ['/blog/vue/vuelife','vue生命周期'],
+                        ['/blog/vue/mock','mock假数据']
+                    ]
+                },
+                {
+                    title:'微信小程序',
+                    collapsable: true,
+                    children: [
+                        ['/blog/wxapp/guild','微信小程序'],
+                        ['/blog/wxapp/wxapp','微信小程序开发流程']
+                    ]
+                },
+                {
+                    title:'Node.js',
+                    collapsable: true,
+                    children: [
+                        ['/blog/node/guild','Node.js'],
+                        ['/blog/koa/koaGuild','koa指南'],
+                    ]
+                },
                 {
                     title:'工具',
                     collapsable: true,
                     children: [
-                        {
-                            title:'Git',
-                            collapsable: true,
-                            children: [
-                                ['/blog/tool/git/guild','Git指南']
-                                // ['/blog/tool/git/bug','踩坑记录']
-                            ]
-                        },
-                        {
-                            title:'vuepress',
-                            collapsable: true,
-                            children: [
-                                ['/blog/tool/vuepress/guild','vuepress指南']
-                            ]
-                        },
-                        {
-                            title:'markdown',
-                            collapsable: true,
-                            children: [
-                                ['/blog/tool/markdown/guild','markdown指南']
-                            ]
-                        }
+                        ['/blog/tool/git/guild','Git指南'],
+                        ['/blog/tool/vuepress/guild','vuepress指南'],
+                        ['/blog/tool/markdown/guild','markdown指南'],
+                        ['/blog/tool/filezilla/guild','FileZilla指南']
                     ]
-                },
-                {
-                    title:'框架',
-                    collapsable: true,
-                    children: [
-                        {
-                            title:'Vue',
-                            collapsable: true,
-                            children: [
-                                ['/blog/vue/guild','Vue指南'],
-                                ['/blog/vue/myvue','vue手动搭建'],
-                                ['/blog/vue/vuelife','vue生命周期'],
-                                ['/blog/vue/mock','mock假数据']
-                            ]
-                        },
-                        {
-                            title:'Koa',
-                            collapsable: true,
-                            children: [
-                                ['/blog/koa/koaGuild','koa指南']
-                            ]
-                        },
-                        ['/blog/wxapp/guild','微信小程序']
-                    ]
-                }
                 // {
                 //     title:'实现',
                 //     collapsable: true,
@@ -132,6 +119,14 @@ module.exports = {
                 //         ['/blog/zaza/center','水平垂直居中'],
                 //     ]
                 // }
+                },
+                {
+                    title:'算法',
+                    collapsable:true,
+                    children:[
+                        ['/blog/suanfa/guild','算法'],
+                    ]
+                }
             ],
             '/question/': [
                 {
@@ -139,7 +134,9 @@ module.exports = {
                     collapsable: false,
                     children: [
                         ['/question/js/js01','JS'],
-                        ['/question/css/css01', 'CSS'],   
+                        ['/question/js/js02','下面代码输出什么？'],
+                        ['/question/css/css01', 'CSS'],  
+                        ['/question/jquery/jq01','jquery'], 
                         ['/question/vue/vue01','vue'],
                         ['/question/es6/es6_01','ES6'],
                         {

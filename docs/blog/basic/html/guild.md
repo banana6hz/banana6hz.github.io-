@@ -16,8 +16,8 @@ HTML5 是最新的 HTML 标准。
 
 ### 页面导入样式时，使用link和@import有什么区别？
 - 用途：
-   - link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；
-   - 而@import是CSS提供的，只能用于加载CSS;  
+   - link属于XHTML标签，除了加载CSS外，还可以引入网站图标
+   - @import是CSS提供的，只能用于加载CSS;  
 - 加载：
    - 页面被加载的时，link会同时被加载  
    - 而@import引用的CSS会等到页面被加载完再加载;  
@@ -26,4 +26,6 @@ HTML5 是最新的 HTML 标准。
    - 而link是XHTML标签，无兼容问题;  
 
 ## Web worker
-Web Worker 是HTML5标准的一部分，这一规范定义了一套 API，它允许一段JavaScript程序运行在主线程之外的另外一个线程中。
+Web Worker 是HTML5标准的一部分，这一规范定义了一套 API，它允许一段JavaScript程序运行在主线程之外的另外一个线程中。  
+Web Worker的作用就是为JavaScript创造多线程环境，允许主线程创建Worker线程，将一些任务分配给后者运行。  
+[Web Worker 使用教程](http://www.ruanyifeng.com/blog/2018/07/web-worker.html)

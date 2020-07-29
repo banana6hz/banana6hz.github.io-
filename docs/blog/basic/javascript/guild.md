@@ -1,5 +1,36 @@
- ## 声明提升   
-**声明提升**：变量或者函数的声明会被提升到该执行环境的顶部，如果是在全局环境声明的变量或函数，那么就会被提升到全局环境的顶部。这就意味着可以把声明语句放在执行语句后面。
+## typeof和instanceOf
+- typeof：检测给定变量的数据类型
+```js
+console.log(typeof 13);//number
+console.log(typeof true);//boolean
+console.log(typeof a);//undefined
+console.log(typeof "banana");//string
+var obj = {};
+console.log(typeof obj);//object
+var fun = function(){};
+console.log(typeof fun);//function
+var sym = Symbol();
+console.log(typeof sym);//symbol
+```
+- instanceof：用于判断一个变量是否某个对象的实例,
+```js
+var arr = new Array();
+console.log(arr instanceof Array);//true
+var date  = new Date();
+console.log(date instanceof Date);//true
+var reg = new RegExp();
+console.log(reg instanceof RegExp);//true
+//更重要的一点是 instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。
+function Foo(){}
+function Aoo(){} 
+Foo.prototype = new Aoo();//JavaScript 原型继承：子的原型等于父的实例
+var foo = new Foo(); //通过构造函数创建
+console.log(foo instanceof Foo)//true 
+console.log(foo instanceof Aoo)//true
+```
+
+## 声明提升   
+**声明提升**：变量或者函数的声明会被提升到<u>该执行环境的顶部</u>，如果是在全局环境声明的变量或函数，那么就会被提升到全局环境的顶部。这就意味着可以把声明语句放在执行语句后面。
 
 🚗变量的赋值可以分为三个阶段  
 - 创建变量：在内存中开辟空间
@@ -32,9 +63,13 @@
 某个执行环境中所有的代码执行完毕后，该环境就会被销毁，保存在其中的所有变量和函数定义也随之销毁。<font color="#425fe">（全局环境直到应用程序退出（如关闭网页）时才会被销毁）</font>
 
 ## 执行上下文  
-执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。执行环境：全局环境、局部环境、eval    
+执行上下文可以理解为当前代码的执行环境，它会形成一个作用域。 
 
-因此在一个JavaScript程序中，必定会产生多个执行上下文。
+执行环境：全局环境、局部环境、eval    
+
+因此在一个JavaScript程序中，必定会产生多个执行上下文。  
+
+每个执行上下文包括：变量对象(VO)、作用域链（ScopeChain)、this指针  
 
 JavaScript引擎会以堆栈的方式来处理它们，这个堆栈，我们称其为函数调用栈(call stack)。栈底永远都是全局（环境）上下文，而栈顶就是当前正在执行的上下文。 
 
@@ -223,6 +258,7 @@ var person2 = new Person();
 person2.sayName()//nico
 alert(person1.sayName()==person2.sayName())//true
 ``` 
+原型模式让我们每个实例都共享了一个sayName函数，但是同时也共享了其他属性。但实际应用中，这样我们就不能创建属性不同的实例了。
 
 **4.组合使用构造模式与原型模式**
 ```js
@@ -230,20 +266,53 @@ function Person(name,age){
     this.name = name;
     this.age = age;
 }
-Person.prototype = function(){
+Person.prototype= {
     constructor:Person,
     sayName:function(){
-        alert(this.name);
+        console.log(this.name);
     }
 }
+var p1 = new Person("banana",18);
+var p2 = new Person("apple",20)
+p1.sayName();
+p2.sayName();
 ```
-
 
 原型与原型层层相链接的过程即为原型链。
 
 原型、原型链的意思何在？原型对象的作用，是用来存放实例中共有的那部份属性、方法，可以大大减少内存消耗。  
 假如我们创建不同的中国人，他们有不同的名字，不同的年龄，但是他们有共同的肤色，共同的头发，肤色和头发就是实例们共有属性，可以通过原型去访问，而不用在每一个实例上都创建这些属性。
 
+**5.动态原型模式**
+```js
+function Person(name,age){
+    this.name = name
+    this.age = age
+    if(typeof this.sayName != "function"){
+        Person.prototype.sayName = function(){
+            console.log(this.name)
+        }
+    }
+}
+```
+只有在sayName()不存在的时候才会创建
+
+**原型链继承**
+原型链继承的关键就是：子的原型等于父的实例
+```js
+function Father(name,age){
+    this.name = name;
+    this.age = age;
+}
+Father.prototype.sayName = function(){
+    console.log(this.name)
+}
+var f1 = new Father("banana",18);
+var Child = function(){}
+Child.prototype = new Father("apple",20);//子的原型等于父的实例
+var c1 = new Child;
+c1.sayName()
+```
 
 ## 闭包  
 闭包：就是有权访问另一个函数作用域中变量的函数。  
@@ -276,7 +345,7 @@ document.write(fun[i]() + "<br />");
 }//以上输出全部是i的最后一次的值（5）
 ```
 如上面的栗子，输出全部是i的最后一次的值——5  
-解析：因为每个函数都保存了createFun函数的活动对象，所以他们引用的都是同一个i,当createFun函数返回后，变量i的值是10  
+解析：因为每个函数都保存了createFun函数的活动对象，所以他们引用的都是同一个i,当createFun函数返回后，变量i的值是5  
 解决：但有时候，我们需要达到循环输出不一样的值，那要怎么做呢？——创建另一个匿名函数
 ```js
 function createFun(){
@@ -298,7 +367,7 @@ document.write(fun[i]() + "<br />");
 
 ## this/call/apply/bind
 
-### this
+**this**
 JS中的this在不同的情况下，它会指向不同的对象,这主要取决于函数的调用方式。  
 - 在全局上下文中，this指的是window
 - 如果是构造函数NEW出来的新对象，this指向这个新对象
@@ -307,7 +376,7 @@ JS中的this在不同的情况下，它会指向不同的对象,这主要取决�
 - 所有的箭头函数都没有自己的this，都指向外层。
 
 在JavaScript中，call、apply和bind是Function对象自带的三个方法。这三个方法的主要作用是改变函数中的this指向。  
-### call()
+**call()**
 call() 方法使用一个指定的 this 值和单独给出的一个或多个参数来调用一个函数  
 `fun.call(thisArg, arg1, arg2, ...)`
 - thisArg
@@ -357,7 +426,7 @@ call() 方法使用一个指定的 this 值和单独给出的一个或多个参�
    ```
    在这个栗子中，this是指向Dog的,相当于把showName放到Dog上执行。
 
-### apply  
+**apply**  
 apply() 方法调用一个具有给定this值的函数，以及作为一个数组（或类似数组对象）提供的参数。  
 `apply([thisObj[,argArray]])`
  如果argArray 不是一个有效的数组或者不是 arguments 对象，那么将导致一个 TypeError
@@ -383,7 +452,7 @@ c.name();
 对的就是这样，call 需要把参数按顺序传递进去，而 apply 则是把参数放在数组里。  
 所以当你的参数是确定的，一般推荐使用call;如果参数不确定，那一般使用apply,再把参数push进去。
 
-### bind()
+**bind()**
 MDN的解释是：bind()方法会创建一个新函数，称为绑定函数。    
 `function.bind(thisArg, arg1, arg2, ...)`  
 当调用这个绑定函数时，绑定函数会以传入的第一个参数作为this，第二个参数以及以后的参数加上绑定函数运行时本身的参数按照顺序作为原函数的参数调用原函数。(讲的啥？？)
@@ -434,8 +503,6 @@ childNodes //节点（元素）的子节点
 attributes //节点（元素）的属性节点
 ```
 
-## 浏览器内核有哪些？
-
 ## String  
 - **toLowerCase、toUpperCase**：转换大小写
 ```js
@@ -479,13 +546,6 @@ console.log(new_str1 = str.slice(-2));//y!
 console.log(new_str2 = str.slice(2,7));//ppy B
 console.log(new_str3 = str.slice(-6,-2));//thda
 
-//split 通过将字符串划分成子串，将一个字符串做成一个字符串数组。
-var str = "https://juejin.im/timeline";
-var new_str = str.split("/");
-console.log(new_str);//["https:", "", "juejin.im", "timeline"]
-var new_str1 = str.split("/",3];//数组长度最长不可超过3
-console.log(new_str1);//["https:", "", "juejin.im"]
-
 //search 检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，返回字符串中匹配的索引值。否则返回 -1
 //不可设置开始检索的位置
 var str  = "banana";
@@ -516,6 +576,16 @@ var str  = "banana";
 var new_str = str.charAt(3);
 console.log(new_str);//a
 //length
+```
+
+- **字符串转数组**
+```js
+//split 通过将字符串划分成子串，将一个字符串做成一个字符串数组。
+var str = "https://juejin.im/timeline";
+var new_str = str.split("/");
+console.log(new_str);//["https:", "", "juejin.im", "timeline"]
+var new_str1 = str.split("/",3];//数组长度最长不可超过3
+console.log(new_str1);//["https:", "", "juejin.im"]
 ```
 
 ## Array()
@@ -619,3 +689,19 @@ console.log(nums.lastIndexOf(4));//5
 //reduce()
 //reduceRight()
 ```
+- **数组转字符串** 
+```js
+var num = [1,2,3];
+num.join("|")
+"1|2|3"
+```
+
+## service worker 和 web worker
+**Web worker**：它是H5的新特性，用于为JavaScript构建多线程环境。允许主线程创建一个Worker线程。把一些计算密集型或者高延迟的任务给Worker执行，执行完毕后再把结果返回给主线程。Worker线程一旦新建成功，就会一直运行，不会被主线程干扰。[Web Worker 使用教程](http://www.ruanyifeng.com/blog/2018/07/web-worker.html)  
+**service worker**：是浏览器与服务器之间的代理服务器，用于构建离线缓存
+- **相同点**：他们都是在常规JS引擎线程以外开辟了新的JS线程。
+- **不同点**：
+   - Service Worker 不是服务于某个特定页面的，而是服务于多个页面的。（按照同源策略）
+   - Service Worker 会常驻在浏览器中，即便注册它的页面已经关闭，Service Worker 也不会停止。本质上它是一个后台线程，只有你主动终结，或者浏览器回收，这个线程才会结束。
+   - 生命周期、可调用的 API 等等也有很大的不同。
+
