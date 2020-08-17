@@ -59,3 +59,27 @@ onPullDownRefresh:function(){
 ```
 
 ## 微信小程序如何授权登录？
+```js
+ onLoad: function(options) {
+    var that = this;
+    wx.login({
+        success(res){
+        console.log(res.code)
+        }
+    }),
+    //查看是否授权
+    wx.getSetting({
+      success: function(res) {
+        if (res.authSetting['scope.userInfo']) {
+          console.log("用户授权了");
+        } else {
+          //用户没有授权
+          console.log("用户没有授权");
+        }
+      }
+    }
+```
+
+授权登陆之后会有一个 `code`,把这个`code` 发给后台，就会返回一个用户的身份证 `openid`,用于唯一标示不同的用户。
+
+
