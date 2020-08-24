@@ -84,7 +84,8 @@ module.exports = {
                         ['/blog/vue/guild','Vue指南'],
                         ['/blog/vue/myvue','vue手动搭建'],
                         ['/blog/vue/vuelife','vue生命周期'],
-                        ['/blog/vue/mock','mock假数据']
+                        ['/blog/vue/mock','mock假数据'],
+                        ['/blog/vue/build','vue的工程化']
                     ]
                 },
                 {
