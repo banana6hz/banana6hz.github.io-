@@ -84,8 +84,12 @@ module.exports = {
                         ['/blog/vue/guild','Vue指南'],
                         ['/blog/vue/myvue','vue手动搭建'],
                         ['/blog/vue/vuelife','vue生命周期'],
+<<<<<<< HEAD
                         ['/blog/vue/mock','mock假数据'],
                         ['/blog/vue/build','vue的工程化']
+=======
+                        ['/blog/vue/mock','mock假数据']
+>>>>>>> 0425f08ac14ab48b5666de7b339c536c4200a55e
                     ]
                 },
                 {
@@ -111,8 +115,12 @@ module.exports = {
                         ['/blog/tool/git/guild','Git指南'],
                         ['/blog/tool/vuepress/guild','vuepress指南'],
                         ['/blog/tool/markdown/guild','markdown指南'],
+<<<<<<< HEAD
                         ['/blog/tool/filezilla/guild','FileZilla指南'],
                         ['/blog/tool/mock/mock','mock.js指南']
+=======
+                        ['/blog/tool/filezilla/guild','FileZilla指南']
+>>>>>>> 0425f08ac14ab48b5666de7b339c536c4200a55e
                     ]
                 // {
                 //     title:'实现',
