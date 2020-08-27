@@ -48,3 +48,14 @@ $(function(){……..}); //执行一个函数
 $(”div > p”).css(”border”, “1px solid gray”); //查找所有div的子节点p，添加样式
 $(”input:radio”, document.forms[0]) //在当前页面的第一个表单中查找所有的单选按钮
 ```
+
+1. 获取元素的后代可以用 `$().find()`  
+2. 获取匹配选择器的第几个元素可以用 `eq(index)`
+3. checkbox的选中状态 `$('check').is(':checked')`
+4. 对于js加载的节点的事件
+```js
+$(document).on('事件名称','选择器',function(){
+  //代码
+})
+```
+5. jq加载别的页面可以用`$().load()`
