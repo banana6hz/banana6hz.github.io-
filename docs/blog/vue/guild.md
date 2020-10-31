@@ -65,3 +65,5 @@ Vuex一般用于中大型Web单页应用对应用的状态进行管理。
 **vuex 作为数据存储中心**
 
 ### element-ui render
+
+### vue 动态路由
