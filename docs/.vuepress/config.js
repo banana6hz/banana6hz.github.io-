@@ -112,7 +112,8 @@ module.exports = {
                         ['/blog/tool/vuepress/guild','vuepress指南'],
                         ['/blog/tool/markdown/guild','markdown指南'],
                         ['/blog/tool/filezilla/guild','FileZilla指南'],
-                        ['/blog/tool/mock/mock','mock.js指南']
+                        ['/blog/tool/mock/mock','mock.js指南'],
+                        ['/blog/tool/webpack/guild','webpack指南']
                     ]
                 // {
                 //     title:'实现',
