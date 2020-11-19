@@ -39,41 +39,34 @@ module.exports = {
             '/blog/': [
                 ['/blog/basic/mind','我的前端'],
                 {
-                    title:'基础',
+                    title:'CSS',
                     collapsable: true,
                     children: [
-                        ['/blog/basic/html/guild','HTML基础'],
-                        {
-                            title:'CSS',
-                            collapsable: true,
-                            children: [
-                                ['/blog/basic/css/guild','css基础'],
-                                ['/blog/basic/css/flex','flex布局'],
-                                ['/blog/basic/css/z-index','深入理解z-index']
-                            ]
-                        },
-                        {
-                            title:'JavaScript',
-                            collapsable: true,
-                            children: [
-                                ['/blog/basic/javascript/guild','JS基础'],
-                                ['/blog/basic/javascript/caozuofu','操作符'],
-                                ['/blog/basic/javascript/browserRendering','浏览器渲染'],
-                                ['/blog/basic/javascript/event','事件'],
-                                ['/blog/basic/javascript/eventloop','js循环机制'],
-                                ['/blog/basic/javascript/es6','ES6']
-                            ]
-                        },
-                        {
-                            title:'网络/浏览器',
-                            collapsable: true,
-                            children: [
-                                ['/blog/basic/net/guild','网络'],
-                                ['/blog/basic/net/http','HTTP协议'],
-                                ['/blog/basic/net/tcp','TCP/IP协议'],
-                                ['/blog/basic/net/session_cookie','cookie与session'],
-                            ]
-                        }
+                        ['/blog/basic/css/guild','css基础'],
+                        ['/blog/basic/css/flex','flex布局'],
+                        ['/blog/basic/css/z-index','深入理解z-index']
+                    ]
+                },
+                {
+                    title:'JavaScript',
+                    collapsable: true,
+                    children: [
+                        ['/blog/basic/javascript/guild','JS基础'],
+                        ['/blog/basic/javascript/caozuofu','操作符'],
+                        ['/blog/basic/javascript/event','事件'],
+                        ['/blog/basic/javascript/eventloop','JS循环机制'],
+                        ['/blog/basic/javascript/es6','ES6']
+                    ]
+                },
+                {
+                    title:'网络/浏览器',
+                    collapsable: true,
+                    children: [
+                        ['/blog/basic/net/guild','网络'],
+                        ['/blog/basic/net/http','HTTP协议'],
+                        ['/blog/basic/net/tcp','TCP/IP协议'],
+                        ['/blog/basic/net/session_cookie','cookie与session'],
+                        ['/blog/basic/net/browserRendering','浏览器渲染']
                     ]
                 },
                 ['/blog/jquery/guild','jQuery'],
@@ -122,6 +115,12 @@ module.exports = {
                 //         ['/blog/zaza/center','水平垂直居中'],
                 //     ]
                 // }
+                },
+                {
+                    title:'总结',
+                    children:[
+                        ['/blog/summary/xiangyingshi','响应式布局'],
+                    ]
                 },
                 {
                     title:'算法',

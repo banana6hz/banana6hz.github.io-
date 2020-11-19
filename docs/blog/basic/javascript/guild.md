@@ -1,16 +1,59 @@
-## typeof和instanceOf
+## JS数据类型
+- 基本类型：`Number`、`String`、`Boolean`、`null`、`undefined`、`Symbol`、`Bigint`
+- 引用类型：`Object`、`Array`、`Date`、`RegExp`、`Math` `Function`
+
+### 基本类型和引用类型的区别
+- 基本类型是<font color="#f34134">按值传递</font>，可以直接操作保存在变量中的实际值
+```js
+var a = 3;
+var b = a;
+b = 4;
+console.log(a)//3
+```
+- 引用类型是<font color="#f34134">按地址传递</font>，是保存在堆内存中的对象
+```js
+var obj1 = {};
+var obj2 = obj1;
+obj2.name = "banana";
+console.log(obj1.name); // banana
+```
+```js
+function fun(person) {
+  person.age = 26
+  person = {
+    name: 'lhz',
+    age: 18
+  }
+  return person
+}
+const p1 = {
+  name: 'banana',
+  age: 19
+}
+const p2 = fun(p1)
+console.log(p1) // -> ?
+console.log(p2) // -> ?
+```
+<details><summary><b>答案</b></summary>
+<p>p1：{name: “lhz”, age: 26}</br>
+p2：{name: “banana”, age: 18}</p>
+</details>
+
+### 数据类型的检测
 - typeof：检测给定变量的数据类型
 ```js
+// 基本类型
 console.log(typeof 13);//number
 console.log(typeof true);//boolean
 console.log(typeof a);//undefined
 console.log(typeof "banana");//string
+var sym = Symbol();
+console.log(typeof sym);//symbol
+// 引用类型：除了function,其他引用类型都会显示Object
 var obj = {};
 console.log(typeof obj);//object
 var fun = function(){};
 console.log(typeof fun);//function
-var sym = Symbol();
-console.log(typeof sym);//symbol
 ```
 - instanceof：用于判断一个变量是否某个对象的实例,
 ```js
@@ -29,23 +72,132 @@ console.log(foo instanceof Foo)//true
 console.log(foo instanceof Aoo)//true
 ```
 
-## 声明提升   
-**声明提升**：变量或者函数的声明会被提升到<u>该执行环境的顶部</u>，如果是在全局环境声明的变量或函数，那么就会被提升到全局环境的顶部。这就意味着可以把声明语句放在执行语句后面。
+### 数据类型的转换
+js的类型转换有以下3种：
+- 转换成数字number
+- 转换成布尔值
+- 转换成字符串
 
-🚗变量的赋值可以分为三个阶段  
-- 创建变量：在内存中开辟空间
-- 初始化变量：将变量初始化为undefined
-- 赋值变量：给变量赋值
+原始值|转换目标|结果
+:--:|:--:|---
+string|number|''=>0, '1'=>1, 'a'=>NaN, '1a1'=>NaN,
+boolean|number|true=>1, false=>0
+array|number|[]=>0, [6]=>6（存在一个元素且为数字）, 其他情况=>NaN
+null|number|0
+除了数组的引用类型｜number|NaN
+symbol|number|抛错
+-|-|-
+string|boolean|''=>false,其他都为true
+number|boolean|0=>false, -0=>false, NaN=false
+null、undefined|boolean|false
+引用类型|boolean|true
+-|-|-
+number|string|eg:5=>'5'
+boolean|string|true=>'true', false=>'false'
+array|string|[]=>'', [1,2]=>'1,2'
+对象|string|'[Object Object]'
 
-🚗对于let、var、function
-- let 的「创建」过程被提升了，但是初始化没有提升。</br>
-<font color="#425fe;">（如果在声明语句之前访问变量，会出现暂时性死区:Uncaught ReferenceError: name is not defined）</font>
-- var 的「创建」和「初始化」都被提升了。<br>
-<font color="#425fe;">（如果在声明语句之前读取，值为undefined）</font>
-- function 的「创建」「初始化」和「赋值」都被提升了。</br>
-<font color="#425fe;">（可在声明语句之前调用）</font>
+📝来做个练习吧
+```js
+//=>number
+Number('')
+Number('1')
+Number('11a')
+Number('abc')
+Number(true)
+Number(false)
+Number([])
+Number([3])
+Number([1,2])
+Number(null)
+var a = new Symbol()
+Number(a)
+```
+<details><summary>答案</summary>
+<p>Number('') //0</br>
+Number('1') //1</br>
+Number('11a') //NaN</br>
+Number('abc') //NaN</br>
+Number(true) //1</br>
+Number(false) //0</br>
+Number([]) //0</br>
+Number([3]) //3</br>
+Number([1,2]) //NaN</br>
+Number(null) //0</br>
+var a = new Symbol()</br>
+Number(a)</p>// Uncaught TypeError: Cannot convert a Symbol value to a number</br>
+</details>
 
-💥注意：函数表达式不会提升。函数声明会优于变量提升。
+📝来做个练习吧
+```js
+// =>string
+String(1)
+String(true)
+String(false)
+String([])
+String([1,2])
+var p = new Object;
+String(p)
+```
+<details><summary>答案</summary>
+<p>String(1) //"1" </br>
+String(true) //"true" </br>
+String(false)//"false" </br>
+String([])   //""  </br>
+String([1,2])// "1,2"</br>
+var p = new Object;</br>
+String(p) //"[object Object]"</p>
+</details>
+
+📝来做个练习吧
+```js
+// =>boolean
+Boolean(0)
+Boolean(-0)
+Boolean(NaN)
+Boolean(a)
+Boolean(1)
+Boolean('')
+Boolean('1')
+Boolean(null)
+Boolean(undefined)
+Boolean([])
+Boolean([1])
+```
+<details><summary>答案</summary>
+<p>Boolean(0) // false</br>
+Boolean(-0) // false</br>
+Boolean(NaN) //false</br>
+Boolean(a) // true</br>
+Boolean(1) // true</br>
+Boolean('') // false</br>
+Boolean('1') // true</br>
+Boolean(null) // false</br>
+Boolean(undefined) false</br>
+Boolean([]) // true</br>
+Boolean([1]) // true</p> 
+</details>
+
+📪 ==和===
+- ==：判断值是否相等
+- ===：判断值和类型是否都相等
+
+📪 ==的类型转换规则：
+- 判断值是否相等，相等返回true
+- 判断是否为null和undefined,是就返回true
+- 判断是否为string和number，是的话就把string转换成number,再比较值是否相等
+- 判断其中一方是否为boolean，是的话就把boolean转换成number，再比较
+- 判断其中一方是否Object，且另一方为String、number、或者Symbol,会将Object转换成字符串，再比较
+📝来做个练习吧
+```js
+[] == ![]
+"34" == 34
+null == undefined
+"34a" == "34"
+```
+<details><summary>答案</summary>
+</details>
+
 
 ## 执行环境以及作用域
 每个函数都有自己的执行环境，每个执行环境都有一个与之关联的变量对象，保存着该环境定义的变量和函数。  
@@ -208,6 +360,8 @@ Person.prototype.constructor == Person
 person1.__proto__ == Person.prototype 
 // **准则2：实例（即person1）的__proto__和原型对象指向同一个地方**
 ```
+关于原型链：当访问一个对象的某个属性时，会先在这个对象本身属性上查找，如果没有找到，则会去它__proto__隐式原型上查找，即它的构造函数的prototype，如果还没有找到就会再在构造函数的prototype的__proto__中查找，这样一层一层向上查找就会形成一个链式结构，我们称为原型链
+
 👉再来看看这张经典图  
 ![prototype](../../../.vuepress/imgs/blog/js/prototype02.png)
 ```js
@@ -314,7 +468,7 @@ var c1 = new Child;
 c1.sayName()
 ```
 
-## 闭包  
+## 什么是闭包  
 闭包：就是有权访问另一个函数作用域中变量的函数。  
 常见方式就是在一个函数内部创建另一个函数，此时内部函数就是一个闭包函数，他可以访问外部函数中的变量。  
 为什么可以访问：因为内部函数的作用域链中包含了外部函数的作用域。
@@ -324,7 +478,7 @@ c1.sayName()
 正常情况下，函数执行完毕后，局部活动对象就会被销毁，内存中仅保存了全局活动对象。  
 但对于闭包来说，当外部函数执行完毕时，该外部函数的作用域链就会被销毁，但是因为内部函数的作用域链还在引用外部函数的活动对象，所以外部函数的活动地对象依然保留在内存中，直到闭包函数被销毁。  
 
-- 缺点：因为闭包会包含外部函数的作用域，所以占用了较多的内存空间。
+- 缺点：因为闭包会包含外部函数的作用域，所以占用了较多的内存空间。如果大量使用闭包，会导致栈内存过大，页面渲染变慢，性能受到影响。
 - 优点：可以让一个变量长期储存在内存中，避免全局变量的污染，可以存在私有成员。
 
 闭包与变量：闭包只能取得包含函数中任何变量的最后一个值  
@@ -364,8 +518,53 @@ for(var i=0;i<fun.length;i++){
 document.write(fun[i]() + "<br />");
 }
 ``` 
+闭包的应用
+- 返回一个函数
+```js
+function f1() {
+  var a = 2
+  function f2() {
+    console.log(a);//2
+  }
+  return f2;
+}
+var x = f1();
+x();
+```
+- 作为函数参数传递
+```js
+var a = 1;
+function foo(){
+  var a = 2;
+  function baz(){
+    console.log(a);
+  }
+  bar(baz);
+}
+function bar(fn){
+  // 这就是闭包
+  fn();
+}
+// 输出2，而不是1
+foo();
+```
+- 异步操作
+```js
+//定时器
+setTimeout(function(){
+    console.log(1)
+},1000)
+```
+- IIFE：立即执行函数
+```js
+var a = 1;
+(function IIFE(){
+ console.log(a)
+})()
+```
 
-## this/call/apply/bind
+
+## 如何改变函数的this指向
 
 **this**
 JS中的this在不同的情况下，它会指向不同的对象,这主要取决于函数的调用方式。  
@@ -503,7 +702,7 @@ childNodes //节点（元素）的子节点
 attributes //节点（元素）的属性节点
 ```
 
-## String  
+## 字符串String  
 - **toLowerCase、toUpperCase**：转换大小写
 ```js
 var str = "Hello";
@@ -515,7 +714,7 @@ console.log(new_str1);//HELLO
 ```
 - **操作方法**
 ```js
-//concat
+//concat 将指定字符串连接到此字符串的结尾
 var str = "Hello,";
 var str1 = "World";
 var new_str = str.concat(str1);
@@ -588,7 +787,7 @@ var new_str1 = str.split("/",3];//数组长度最长不可超过3
 console.log(new_str1);//["https:", "", "juejin.im"]
 ```
 
-## Array()
+## 数组Array
 1. 创建方法  
 ```js
 //Array构造函数 可用new操作符，也可不用
@@ -705,3 +904,9 @@ num.join("|")
    - Service Worker 会常驻在浏览器中，即便注册它的页面已经关闭，Service Worker 也不会停止。本质上它是一个后台线程，只有你主动终结，或者浏览器回收，这个线程才会结束。
    - 生命周期、可调用的 API 等等也有很大的不同。
 
+
+
+
+## 安全
+1. XSS：执行恶意脚本
+2. CSRF：伪造请求
