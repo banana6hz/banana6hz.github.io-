@@ -80,7 +80,68 @@ export default {
 }
 </script>
 ```
-#### 通过$ref实现组件通信  
+#### 通过$children和$parent、$ref实现组件通信  
+- $parent/$children：访问父/子实例。  
+🍗 父组件只有一个，是唯一确定的
+```js
+// children.vue
+<script>
+export default{
+    created(){
+        console.log(this.$parent.name)
+    }
+}
+</script>
+```
+🍗 但是子组件可以有多个，所以$children返回的数组
+```js
+<script>
+export default{
+    created(){
+        console.log(this.$children)
+        this.$children.forEach((VueComponent)=>{
+            if(VueComponent.name == "你要找的组件名"){
+                // 执行操作
+            }
+        })
+    }
+}
+</script>
+```
+- $ref: 如果是在普通的DOM元素上使用，引用的指向就是该DOM元素。如果是在子组件上，引用的就是子组件的实例
+```js
+// father.vue
+<template>
+    <div>
+        <Children ref="child1"></Children>
+    </div>
+</tempate>
+<script>
+import Children from '/children.vue
+export default{
+    data() {
+        return{
+           name =  'fatherbanana'
+        }
+    },
+    mounted(){
+        console.log(this.$ref.child1.name)//fatherbanana123
+    }
+}
+</script>
+// children.vue
+<script>
+export default {
+    data(){
+        return {
+            name: 'childrenbanana'
+        }
+    },
+    mounted(){
+        this.name = this.$parent.name + '123';
+    }
+};
+```
 
 #### 通过$emit实现子组件向父组件通信
 - 父组件通过@event监听和接收参数
@@ -126,13 +187,11 @@ export default {
 #### eventBus:父子、兄弟、隔代组件
 创建一个空的vue实例
 
-#### children和parent
-
 #### $root
 
 #### provide和inject：隔代
 
-
+<!-- https://juejin.cn/post/6844904048118726663#comment -->
 
 ## 🎠Vue 的父组件和子组件生命周期钩子函数执行顺序？
 可以分为四个部分：  
@@ -262,10 +321,11 @@ console.log(this.$refs.banana)
    - **false=>true**：*beforeCreate* ➡ *Created* ➡ *beforeMounted* ➡ *mounted*
    - **true=>false**: *beforeDestroy* ➡ *Destroyed*
 - **v-show**：
-    - **初始渲染**：无论初始状态，都会渲染，并依次执行 beforeCreate,created
-    - **切换**：对生命周期无影响
+    - **初始渲染**：无论初始状态，都会渲染，并依次执行 *beforeCreate* ➡ *Created* ➡ *beforeMounted* ➡ *mounted*
+    - **切换**：对生命周期无影响,切换时组件始终保持在mounted钩子
 
 ## 🎠vue如何操作数组
+因为 JavaScript 的限制，Vue不能检测到数组的变化，所以不能通过操作数组来渲染dom的，不能通过属性或者索引控制数组，比如length，index，解决的方法是通过set方法
 - 根据索引值赋值
 ```js
 Vue.set(vm.items, indexOfItem, newValue)
@@ -301,7 +361,7 @@ vm.items.splice(newLength)
    - $route.hash
 
 ## 🎠router-link和router.push区别
-- router-link 可以实现页面的跳转，会在渲染的时候就加载对应的路由，会默认阻止浏览器的默认时间
+- router-link 可以实现页面的跳转，会在渲染的时候就加载对应的路由，会默认阻止浏览器的默认
 - router.push 也可以实现页面的跳转，还可以在跳转前写一些逻辑。
 
 <!-- ## 你有什么爱好：周末和同学出去拍照————哦吼！送了一条命！ -->
