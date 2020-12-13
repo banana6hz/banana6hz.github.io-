@@ -88,3 +88,21 @@ onPullDownRefresh:function(){
 - unionid: 用户在同一个微信开放平台下的移动应用的唯一标示。如果开发者拥有同一个微信开放平台帐号的多个移动应用、网站应用、和公众帐号（包括小程序），可通过 UnionID 来区分用户的唯一性。对于拥有多个账号的企业来说，unionid可以帮助识别不同公众账号下的用户是否是同一个人。还可以去除重复关注的用户数，便于统计真实的关注用户总数。
 
 
+## 小程序登陆流程
+- `wx.login` 返回一个code
+-  以 `code` 为参数发送请求给后台，然后后台返回 `openid`(唯一识别用户)
+- 有了这个`openid`,就能知道是哪个用户，以及用这个去获取用户的个人信息
+
+## 如何获取微信用户手机号
+- 授权获取用户手机号，并用bindgetphonenumber()回调获取到微信服务器返回的加密数据
+```js
+<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+getPhoneNumber (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+  }
+```
+- 前端将 wx.login传回来的code 和 bindgetphonenumber传回来的iv, encryptedData,传给后台解析
+
+

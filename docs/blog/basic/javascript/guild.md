@@ -71,6 +71,11 @@ var foo = new Foo(); //通过构造函数创建
 console.log(foo instanceof Foo)//true 
 console.log(foo instanceof Aoo)//true
 ```
+- Object.prototype.toString.call()
+```js
+var arr = new Array()
+Object.prototype.toString.call(arr)// "[object Array]"
+```
 
 ### 数据类型的转换
 js的类型转换有以下3种：
@@ -194,8 +199,14 @@ Boolean([1]) // true</p>
 "34" == 34
 null == undefined
 "34a" == "34"
+NaN == NaN
 ```
 <details><summary>答案</summary>
+<p>true</p></br>
+<p>true</p></br>
+<p>false</p></br>
+<p>false </p></br>
+NaN表示非数字值，特殊之处：它和任何值都不相等，包括自身。判断NaN的方法：x!=x返回true
 </details>
 
 
@@ -876,16 +887,55 @@ console.log(nums.lastIndexOf(4));//5
 
 - **迭代方法**  
 ```js
-//every()——如果每一项都返回true,则返回true
-//some()——任一项返回true,则返回true
-//fiter()——返回执行结果为true的结果组成的数组
-//map()——返回每一次函数调用结果组成的数组
-//forEach()——每一项都运行，无返回
+//🍊every()——如果每一项都返回true,则返回true 不改变原数组
+//🍊some()——任一项返回true,则返回true  不改变原数组
+var arr =[
+    {name:"aaa",sex:0,age:18},
+    {name:"bbb",sex:1,age:18},
+    {name:"ccc",sex:0,age:18}
+]
+var every = arr.every(function(obj){   //一假即假
+    return obj.sex == 0
+})
+var some = arr.some(function(obj){     //一真即真
+    return obj.name == "aaa"
+})
+console.log(every,some)//false true
+
+//🍊filter()——返回执行结果为true的结果组成的数组  不改变原数组
+var filter = arr.filter(function(obj){
+    return obj.sex == 0
+})
+console.log(filter)
+// [{name: "aaa", sex: 0, age: 18}
+// {name: "ccc", sex: 0, age: 18]
+
+//🍊map()——返回每一次函数调用结果组成的数组 不改变原数组
+var map = arr.map(function(obj){
+    return obj.age+1
+})
+console.log(map)//[19,19,19]
+
+//🍊forEach()——每一项都运行，无返回 ❗️改变原数组❗️
+arr.forEach(function(obj){
+    if(obj.sex==0){
+        obj.sex="女"
+    }else{
+        obj.sex="男"
+    }
+})
+console.log(arr)
+// [{name: "aaa", sex: "女", age: 18}
+// {name: "bbb", sex: "男", age: 18}
+// {name: "ccc", sex: "女", age: 18}]
 ```
 
 - **归并方法**  
 ```js
 //reduce()
+var arr = [1,2,3,4]
+var res = arr.reduce((x,y) => x+y)
+console.log(res)
 //reduceRight()
 ```
 - **数组转字符串** 
@@ -894,6 +944,31 @@ var num = [1,2,3];
 num.join("|")
 "1|2|3"
 ```
+
+- **ES6方法**
+```js
+//🍊form() 将类似数组的对象和可遍历的对象转化为真正的数组
+const arr = ["a","b","c"]
+Array.from(arr)//["a", "b", "c"]
+Array.from("foo")//["f","o","o"]
+
+//🍊find() 传入一个回调函数，找到数组中符合当前搜索规则的第一个元素
+var arr = [1,2,3,4,5,6,7,8]
+var findarr = arr.find(n=> n%2==0)
+console.log(findarr)//2
+
+//🍊findIndex() 传入一个回调函数，找到数组中符合当前搜索规则的第一个元素，返回它的下标，终止搜索
+var arr = [1,2,3,4,5,6,7,8]
+var findArr = arr.findIndex(n=> n%2==0)
+console.log(findArr)//1
+
+//🍊fill() 用一个新元素替换数组内的元素，可以指定替换下标范围
+// fill(value,start,end)
+var arr = [1,2,3,4,5,6,7,8]
+console.log(arr.fill(886,2,5))//[1, 2, 886, 886, 886, 6, 7, 8]
+console.log(arr.fill(886,2))//[1, 2, 886, 886, 886, 886, 886, 886]
+```
+
 
 ## service worker 和 web worker
 **Web worker**：它是H5的新特性，用于为JavaScript构建多线程环境。允许主线程创建一个Worker线程。把一些计算密集型或者高延迟的任务给Worker执行，执行完毕后再把结果返回给主线程。Worker线程一旦新建成功，就会一直运行，不会被主线程干扰。[Web Worker 使用教程](http://www.ruanyifeng.com/blog/2018/07/web-worker.html)  
@@ -908,5 +983,11 @@ num.join("|")
 
 
 ## 安全
-1. XSS：执行恶意脚本
-2. CSRF：伪造请求
+1. XSS：跨站脚本攻击。
+- 理解：攻击者通过注入恶意的脚本，在用户浏览网页的时候进行攻击。
+- 场景：攻击者在留言板页面编写js代码，当浏览器在解析到用户输入代码的时候，会执行这一段代码，比如通过 `documen.cookie` 窃取用户的cookie值。又或者通过 `<script>window.location.href="http://www.baidu.com";</script>` 进行网页挑战。新浪在2011年也经历过严重的xss漏洞，使得大量用户自动关注某用户并转发某条微博
+- 防御：对输入(和URL参数)进行过滤，对输出进行编码
+2. CSRF：跨站请求伪造。
+- 理解：可以理解为盗用者盗用了用户的身份，以用户的名义发送恶意请求。
+- 场景：比如用户登陆一个网站后，在cookie未过期的情况下去访问另一个，攻击者用来制造攻击的网站，假如这个攻击者的网站上有一张诱导用户点击的图片，但是这张图片是可以修改数据库的，当用户去点击这张图片之后，攻击者就可以以用户的名义去修改数据库。
+- 防御：检查https头部的refer,使用token、在http头中自定义属性并验证
