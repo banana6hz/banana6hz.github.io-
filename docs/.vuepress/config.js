@@ -59,6 +59,13 @@ module.exports = {
                     ]
                 },
                 {
+                    title:'TypeScript',
+                    collapsable: true,
+                    children: [
+                        ['/blog/basic/typescript/guild', 'TS基础']
+                    ]
+                },
+                {
                     title:'网络/浏览器',
                     collapsable: true,
                     children: [
@@ -118,9 +125,11 @@ module.exports = {
                 // }
                 },
                 {
-                    title:'总结',
+                    title:'专题',
                     children:[
                         ['/blog/summary/xiangyingshi','响应式布局'],
+                        ['/blog/summary/shuzu','数组操作合集'],
+                        ['/blog/summary/zifuchuan','字符串操作合集'],
                     ]
                 },
                 {
