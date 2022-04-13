@@ -17,6 +17,7 @@ module.exports = {
             // { text: 'Debug',link: '/debug/css'}, 
             { text: 'Question',link: '/question/js/js01'},
             { text: 'Debug',link: '/debug/guild'},
+            { text: 'Tool', link: '/tools/markdown-editor'},
             { text: 'Libraly', 
               items: [
                 { text: '腾讯前端团队', link:'http://www.alloyteam.com/page/0/'},
@@ -161,6 +162,16 @@ module.exports = {
                         },
                     ]
                 }
+            ],
+            '/tools/': [
+                ['/tools/markdown-editor', 'Markdown'],
+                ['/tools/tinymce', '富文本Tinymce'],
+                ['/tools/clipboard', 'Clipboard'],
+                ['/tools/pdf', 'PDF'],
+                ['/tools/excel', 'Excel'],
+                ['/tools/table', 'Table'],
+                ['/tools/screenfull', 'Screenfull'],
+                ['/tools/driver', 'Driver']
             ],
             // 侧边栏在 /debug/ 上
             '/debug/': [
