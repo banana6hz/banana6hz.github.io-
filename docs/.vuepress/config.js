@@ -60,6 +60,13 @@ module.exports = {
                     ]
                 },
                 {
+                    title:'ES6',
+                    collapsable: true,
+                    children: [
+                        ['/blog/es6/promise','Promise']
+                    ]
+                },
+                {
                     title:'TypeScript',
                     collapsable: true,
                     children: [
