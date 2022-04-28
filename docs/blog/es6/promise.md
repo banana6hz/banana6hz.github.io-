@@ -114,10 +114,62 @@ const p6 = new Promise((resolve, reject) => {
   console.log("Here is p6");
   reject("失败");
 });
-p6.then(() => {
-  console.log("Here is p6.then()");
-});
+p6.then(
+  () => {
+    console.log("Here is p6.then().onFulfilled");
+  },
+  () => {
+    console.log("Here is p6.then().onRejected");
+  }
+);
 console.log("p6.then() =>", p6.then());
+console.log("-------------------------------------------------");
+
+const p7 = new Promise((resolve, reject) => {
+  console.log("Here is p7");
+  resolve("成功");
+});
+p7.then(
+  () => {
+    console.log("Here is p7.then().onFulfilled");
+    throw "error";
+  },
+  () => {
+    console.log("Here is p7.then().onRejected");
+  }
+).then(
+  () => {
+    console.log("Here is 2.0-p7.then().onFulfilled");
+  },
+  () => {
+    console.log("Here is 2.0-p7.then().onRejected");
+  }
+);
+console.log("p7.then() =>", p7.then());
+console.log("-------------------------------------------------");
+
+const p8 = new Promise((resolve, reject) => {
+  console.log("Here is p8");
+  reject("失败");
+});
+p8.then(
+  () => {
+    console.log("Here is p8.then().onFulfilled");
+  },
+  () => {
+    console.log("Here is p8.then().onRejected");
+    throw "error";
+  }
+).then(
+  () => {
+    console.log("Here is 2.0-p8.then().onFulfilled");
+  },
+  () => {
+    console.log("Here is 2.0-p8.then().onRejected");
+  }
+);
+console.log("p8.then() =>", p8.then());
+console.log("-------------------------------------------------");
 ```
 
 <details><summary><b>点击查看结果</b></summary>
@@ -129,6 +181,6 @@ console.log("p6.then() =>", p6.then());
 可以得出：
 
 - 不管是否执行`resolve`和`reject`，都能打印出`promise.then()`，返回该`promise`本身
-- 只有`promise`状态为`fulfilled`，才会进人回调函数`promise.then()`, 执行里面的内容
-- `promise.then()`就是一个回调函数，用户可以自定义函数内容，当`promise`状态为`fulfilled`时执行
-- 因为`promise.then()`返回的也是一个`promise`对象，所以可以添加多个`then()`链试调用，并按添加顺序执行
+- 因为`promise.then()`返回的也是一个`promise`对象，所以可以添加多个`then()`链试调用，他们按添加顺序执行
+- `promise.then()`就是一个回调函数，用户可以自定义函数内容, 它可以传入两个参数，分别指定`resolved`状态和`rejected`状态的回调函数，即让它成功之后做什么失败之后做什么
+- `pending`状态下的`promise`不会执行回调函数`then()`，只有变为`resolved`和`reject`状态之后，通过`then()` 添加的回调函数才会被调用
