@@ -369,3 +369,72 @@ const p = Promise.all([p1, p2, p3]);
 
 - 只有 p1、p2、p3 的状态都变成 fulfilled，p 的状态才会变成 fulfilled，此时 p1、p2、p3 的返回值组成一个数组，传递给 p 的回调函数。
 - 只要 p1、p2、p3 之中有一个被 rejected，p 的状态就变成 rejected，此时第一个被 reject 的实例的返回值，会传递给 p 的回调函数。
+
+### Promise.race()
+
+- `Promise.race()`方法的参数与`Promise.all()`方法一样
+- 只要 p1、p2、p3 之中有一个实例率先改变状态，p 的状态就跟着改变。那个率先改变的 `Promise` 实例的返回值，就传递给 p 的回调函数
+
+### Promise.allSettled()
+
+有时候我们希望等一组异步操作都结束了，不管是每一个操作是成功还是失败，再进行下一步操作，但是现有的 Promise 很难达到这样的要求
+
+- Promise.all()方法只适合所以异步操作都成功的情况，一旦有一个操作失败了，就会返回结果，不管后面的操作是否完成
+- Promise.allSettled()方法接受一个数组作为参数，数组的每个成员都是一个 Promise 对象，并返回一个新的 Promise 对象
+- 只有等到参数数组的所有 Promise 对象都发生状态变更（不管是 fulfilled 还是 rejected），返回的 Promise 对象才会发生状态变更
+
+```js
+const resolved = Promise.resolve(42);
+const rejected = Promise.reject(-1);
+
+const allSettledPromise = Promise.allSettled([resolved, rejected]);
+
+allSettledPromise.then(function (results) {
+  console.log(results);
+});
+// [
+//    { status: 'fulfilled', value: 42 },
+//    { status: 'rejected', reason: -1 }
+// ]
+```
+
+- Promise.allSettled()的返回值 allSettledPromise，状态只可能变成 fulfilled
+- 它的回调函数接收到的参数是数组 results。results 的每个成员是一个对象，对象的格式是固定的，对应异步操作的结果
+
+### Promise.any()
+
+- 该方法接受一组 Promise 实例作为参数
+- 只要参数实例有一个变成 fulfilled 状态，包装实例就会变成 fulfilled 状态
+- 所以的参数实例都变成 reject 状态，包装实例就会变成 rejected 状态
+- 和 Promise.race()的区别是，有一个参数实例变成 reject，不会立刻结束，必须等到所有参数 Promise 变成 rejected 状态才会结束
+- Promise.any()抛出的错误，不是一个一般的 Error 错误对象，而是一个 AggregateError 实例。它相当于一个数组，每个成员对应一个被 rejected 的操作所抛出的错误
+
+```js
+var resolved = Promise.resolve(42);
+var rejected = Promise.reject(-1);
+var alsoRejected = Promise.reject(Infinity);
+
+Promise.any([resolved, rejected, alsoRejected]).then(function (result) {
+  console.log(result); // 42
+});
+
+Promise.any([rejected, alsoRejected]).catch(function (results) {
+  console.log(results); // [-1, Infinity]
+});
+```
+
+### Promise.resolve()
+
+- 将一个现有对象变为 promise 对象
+
+```js
+Promise.resolve("foo");
+// 等价于
+new Promise((resolve) => resolve("foo"));
+```
+
+### Promise.reject()
+
+- Promise.reject(reason)方法也会返回一个新的 Promise 实例，该实例的状态为 rejected。
+
+### 手写 Promise
