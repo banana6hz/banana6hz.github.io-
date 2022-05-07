@@ -438,3 +438,731 @@ new Promise((resolve) => resolve("foo"));
 - Promise.reject(reason)方法也会返回一个新的 Promise 实例，该实例的状态为 rejected。
 
 ### 手写 Promise
+
+#### 定义初始结构
+
+想想`Promise`是怎么创建实例的呢？
+
+```js
+let promise1 = new Promise(() => {});
+```
+
+这样我们就有了一个`Promise`对象 promise1 了，可以看到这里是通过`new`来创造实例的，那我们也来创造一下  
+要通过`new`来创造实例的话，可以用构造函数也可以用`class`, 我们来试试用`class`吧
+
+```js
+class myPromise {}
+```
+
+但是我们创建的`Promise`是有一个参数的，参数是个函数，并且当我们传入这个函数的时候，这个函数会自动执行
+
+```js
+class myPromise {
++  constructor(func) {
++    func();
++  }
+}
+```
+
+### 实现 resolve、reject
+
+想想`Promise`里的 resolve 和 reject 是什么？是异步操作完成之后的执行的回调函数，要去执行一个函数，就要先定义这个函数对不对(注意：class 的方法需要通过 this 去调用)
+
+```js
+class myPromise {
+  constructor(func) {
+    func(this.resolve, this.reject);
+  }
+  resolve() {}
+  reject() {}
+}
+```
+
+那 resolve 和 reject 要干什么，什么时候执行呢，想想`Promise`的三个状态，以及状态一旦改变就永久不变这个特点。我们来捋一下思路，当异步操作成功时，执行 resolve,`Promise`状态就会从 pending 变成 fulfilled；当异步操作失败时，执行 reject,`Promise`状态就会从 pending 变成 rejected。听起来很简单是不是，但要实现刚刚的逻辑，我们还需要一个变量来储存`Promise`的状态，以及一个变量储存`Promise`的结果，试试用代码来实现吧
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    func(this.resolve(), this.reject);
+  }
+  resolve() {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+    }
+  }
+  reject() {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+    }
+  }
+}
+```
+
+看起来还不错是不是，等等，我们`Promise`的 resolve 和 reject 是不是可以传参数的，我们也加上
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    func(this.resolve, this.reject);
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+    }
+  }
+}
+```
+
+嗯，现在看起来应该差不多了，让我们来 new 一个实例看看吧
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    func(this.resolve, this.reject);
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+    }
+  }
+}
+let promise1 = new myPromise((resolve, reject) => {
+  resolve("让我试试");
+});
+```
+
+咦~怎么出错了呢？  
+![输出结果](../../.vuepress/imgs//blog/es6/promise_manual01.png "输出结果")
+
+问题来了，他说 PromiseState 是 undefined，不对呀，我明明在 contruster 里面定义了呀！这里要注意了，我们在通过 this 去访问 PromiseState，访问到了 contruster 里面的 PromiseState 了吗？一般这种 this 丢失的问题，我们先看看 this 的调用位置
+
+- 我们是实例被创建之后执行 resolve，然后在 resolve 里面通过 this 去访问 PromiseState 的
+- 也就相当于不在 class 内部使用这个 this
+- 实例是在外部环境创建的，外部环境没有生命 PromiseState 这个变量，因此这里会报错
+
+我们可是试试把类里面的 this 绑定到实例，这样通过实例去访问 this 的时候，就可以访问到 contruster 里面的变量
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    func(this.resolve.bind(this), this.reject.bind(this));
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+    }
+  }
+}
+let promise1 = new myPromise((resolve, reject) => {
+  resolve("让我试试");
+});
+console.log(promise1);
+```
+
+终于成功了！
+
+![输出结果](../../.vuepress/imgs//blog/es6/primise_manual02.png "输出结果")
+
+有兴趣的话可以和原生的`Promise`对比下执行结果，我们继续，想想`Promise`是不是还有个 then 方法还没实现呢？来吧，我们一起实现
+
+### then()
+
+首先我们复习下 then 方法的一些要点
+
+- then 方法接受两个回调函数，一个在异步操作成功时执行，一个在异步操作失败时执行
+- 状态改变时（不管是失败还是成功）就会执行对应的回调函数
+- 状态不改变一直为 pending 的话不会执行传入的回调函数
+
+让我们用代码实现一下
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    func(this.resolve.bind(this), this.reject.bind(this));
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+    }
+  }
+  then(onFulfilled, onRejected) {
+    if (this.PromiseState === myPromise.FULFILLED) {
+      onFulfilled(this.PromiseResult);
+    }
+    if (this.PromiseState === myPromise.REJECTED) {
+      onRejected(this.PromiseResult);
+    }
+  }
+}
+let promise1 = new myPromise((resolve, reject) => {
+  resolve("让我试试");
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+```
+
+看看结果
+
+![输出结果](../../.vuepress/imgs//blog/es6/primise_manual03.png "输出结果")
+
+因为我们在实例里执行了 resolve,所以输出的是 onFulfilled，我们在试试 reject 看看
+
+```js
+let promise1 = new myPromise((resolve, reject) => {
+  reject("让我试试");
+});
+```
+
+看看结果
+
+![输出结果](../../.vuepress/imgs//blog/es6/primise_manual04.png "输出结果")
+
+嗯嗯，不错不错，再来看看试试如果 resolve 和 reject 都存在的话会怎么样
+
+```js
+let promise1 = new myPromise((resolve, reject) => {
+  resolve("让我试试");
+  reject("让我试试");
+});
+```
+
+![输出结果](../../.vuepress/imgs//blog/es6/primise_manual03.png "输出结果")
+
+很好，这里和原生一样，状态一旦发生了改变，就永久不变，所以 reject 并没有执行  
+下面还要做什么呢？我们想想，在原生的`Promise`中，执行异常抛错的时候，是不是会执行 then 的第二个函数，即 reject 状态的回调函数，在这里，我们补充下一个知识点
+
+- 执行异常抛错的时候, 会执行 then 的第二个函数，即 reject 状态的回调函数
+- 而不是 catch()方法，catch()方法其实会返回一个`Promise`并且处理拒绝的情况,它的行为和调用`Promise.then(undefined, onRejected)`相同
+- Promise.prototype.catch()方法是.then(null, rejection)或.then(undefined, rejection)的别名
+- 我们一般不在 then 方法里面定义 reject 的回调函数，而是用 catch
+
+补充完这些知识，我们来想想实现 catch()需要注意哪些点
+
+- 用 try/catch 捕获创建实例过程中的错误
+- 如果没有报错就继续执行 resolve/reject
+- 捕获到错误的时候，把错误信息传递给 reject,执行 reject
+
+根据这些点，我们来试试实现
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    try {
+      func(this.resolve.bind(this), this.reject.bind(this));
+    } catch (err) {
+      this.reject(err);
+    }
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+    }
+  }
+  then(onFulfilled, onRejected) {
+    if (this.PromiseState === myPromise.FULFILLED) {
+      onFulfilled(this.PromiseResult);
+    }
+    if (this.PromiseState === myPromise.REJECTED) {
+      onRejected(this.PromiseResult);
+    }
+  }
+}
+let promise1 = new myPromise((resolve, reject) => {
+  throw new Error("throw Error");
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+```
+
+看看结果  
+![输出结果](../../.vuepress/imgs//blog/es6/primise_manual05.png "输出结果")
+
+好了，到了这一步，看起来是实现了一个基本版的 Promise 了，为什么是看起来呢？我们手写的`Promise`和原生`Promise`最大的区别就是，原生`Promise`会考虑很多特殊情况，而我们只是一个粗糙的半成品，一旦出现边际情况就会瓦解。  
+比如，如果我们在 then 方法里的两个参数不是函数那会怎么样
+
+```js
+let promise1 = new myPromise((resolve, reject) => {
+  resolve("banan");
+});
+promise1.then(null, (reason) => {
+  console.log("onRejected", reason);
+});
+```
+
+是会报错的  
+![输出结果](../../.vuepress/imgs//blog/es6/primise_manual06.png "输出结果")
+
+原生的`Promise`有规定，then 方法里面的两个参数如果不是函数的话就要被忽略，所以原生的 Promise 在 then 方法的参数不是函数的情况下是不会报错的，所以我们在手写`Promise`的时候也要加上相应的处理：
+
+- 判断 then 方法的参数是否是函数
+- 对于 onFulfilled 来说如果不是函数就将 value 原封不动的返回
+- 对于 onRejected 来说如果不是函数就返回 reason，onRejected 因为是错误处理，所以我们还需要 throw 一个 Error
+  试试用代码实现吧
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    try {
+      func(this.resolve.bind(this), this.reject.bind(this));
+    } catch (err) {
+      this.reject(err);
+    }
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+    }
+  }
+  then(onFulfilled, onRejected) {
+    onFulfilled =
+      typeof onFulfilled === "function" ? onFulfilled : (value) => value;
+    onRejected =
+      typeof onRejected === "function"
+        ? onRejected
+        : (reason) => {
+            throw reason;
+          };
+    if (this.PromiseState === myPromise.FULFILLED) {
+      onFulfilled(this.PromiseResult);
+    }
+    if (this.PromiseState === myPromise.REJECTED) {
+      onRejected(this.PromiseResult);
+    }
+  }
+}
+let promise1 = new myPromise((resolve, reject) => {
+  resolve("banan");
+});
+promise1.then(null, (reason) => {
+  console.log("onRejected", reason);
+});
+```
+
+发现不会报错了，可以自己再试试 onReject 不是 function 的情况  
+好了我们又更进一步了，接下来我们要实现最本质的功能了，`Promise`是什么，是一个异步的解决方案呀，当然是要解决异步啦，我们可以看看其实目前的代码是同步的
+
+```js
+console.log(1);
+let promise1 = new myPromise((resolve, reject) => {
+  console.log(2);
+  resolve("banana");
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled:", result);
+  },
+  (reason) => {
+    console.log("onRejected:", reason);
+  }
+);
+console.log(3);
+```
+
+这里的输出顺序是：1 2 onFulfilled:banana 3  
+我们再来看看原生的`Promise`的输出顺序
+
+```js
+console.log(1);
+let promise1 = new Promise((resolve, reject) => {
+  console.log(2);
+  resolve("banana1");
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+console.log(3);
+```
+
+输出顺序是：1 2 3 onFulfilled:banana  
+原生的 Promise.then()是一个异步的，我们要怎么实现这样的效果呢？用 setTimeout 就可以啦！
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    try {
+      func(this.resolve.bind(this), this.reject.bind(this));
+    } catch (err) {
+      this.reject(err);
+    }
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+    }
+  }
+  then(onFulfilled, onRejected) {
+    onFulfilled =
+      typeof onFulfilled === "function" ? onFulfilled : (value) => value;
+    onRejected =
+      typeof onRejected === "function"
+        ? onRejected
+        : (reason) => {
+            throw reason;
+          };
+    if (this.PromiseState === myPromise.FULFILLED) {
+      setTimeout(() => {
+        onFulfilled(this.PromiseResult);
+      });
+    }
+    if (this.PromiseState === myPromise.REJECTED) {
+      setTimeout(() => {
+        onRejected(this.PromiseResult);
+      });
+    }
+  }
+}
+console.log(1);
+let promise1 = new myPromise((resolve, reject) => {
+  console.log(2);
+  resolve("banana1");
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+console.log(3);
+```
+
+输出顺序是：1 2 3 onFulfilled:banana, 这样就有了和原生一样的异步效果啦，但是真的是吗？假如我们给原生的`Promise`里添加 setTimeout，resolve 也异步执行，那么就会出现一个问题了，resolve 是异步的，then 也是异步的，究竟谁会先被调用呢
+
+```js
+console.log(1);
+let promise1 = new Promise((resolve, reject) => {
+  console.log(2);
+  setTimeout(() => {
+    resolve("banana1");
+    console.log(4);
+  });
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+console.log(3);
+```
+
+输出顺序是：1 2 3 4 onFulfilled:banana  
+我们来给自己的`Promise`试试
+
+```js
+console.log(1);
+let promise1 = new myPromise((resolve, reject) => {
+  console.log(2);
+  setTimeout(() => {
+    resolve("banana1");
+    console.log(4);
+  });
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+console.log(3);
+```
+
+输出顺序是：1 2 3 4  
+还家伙 onFulfilled：banan 没有输出,我们来看看发生了什么
+
+- 遇到`console.log(1);`，输出<b>1</b>
+- 遇到`console.log(2);`, 输出<b>2</b>
+- 遇到`setTimeout`，进入宏任务队列等待
+- 因为 promise1 的状态没有改变，所以不会执行 promise1.then()里面的回调函数
+- 遇到`console.log(3);`, 输出<b>3</b>
+- 所有同步任务执行完毕，无微任务，进入下一个宏任务`setTimeout`
+- 遇到`resolve('banana1')`,primise1 状态改为 fulfilled
+- 遇到`console.log(4);`, 输出<b>4</b>
+- 结束
+
+这么看好像是没毛病，的确是不会输出 `onFulfilled：banan`，因为遇到 promise1.then()的时候，promise1 的状态并没有改变，那原生 Promise 是做了什么处理，能让 promise1 改变状态之后再调用一次 then()呢？或者说我们可以怎么修改能达到这样的效果呢？  
+首先，我们没有执行 then()里的回调函数是因为，到了 then 的时候，promise1 还是 pending 状态，所以我们需要给 pending 状态的时候添加相应的处理，那 pending 的时候需要做什么呢？我们要明确一点就是，我们需要在状态发生改变的时候去执行回调函数,如果遇到 then 的时候状态还没发生改变，我们要让回调函数推迟执行，那么我们就先要把传给 then 的回调函数存起来，然后我们再在 resolve/reject 里面去执行之前保存的回调函数
+
+- 在 then()里面判断，是否还是 pending 状态
+- 如果是 pending 状态，先记录下回调函数
+- resolve/reject 里面对记录下的回调函数进行处理
+- 为了保留 then 里的回调函数，我们可以创建数组来保存函数,为什么用数组来保存这些回调呢？因为一个 promise 实例可能会多次 then，也就是经典的链式调用，而且数组是先入先出的顺序
+  让我们来试试吧
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    this.onFulfilledCB = [];
+    this.onRejectdCB = [];
+    try {
+      func(this.resolve.bind(this), this.reject.bind(this));
+    } catch (err) {
+      this.reject(err);
+    }
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.FULFILLED;
+      this.PromiseResult = result;
+      this.onFulfilledCB.forEach((cb) => {
+        cb(result);
+      });
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      this.PromiseState = myPromise.REJECTED;
+      this.PromiseResult = reason;
+      this.onRejectdCB.forEach((cb) => {
+        cb(reason);
+      });
+    }
+  }
+  then(onFulfilled, onRejected) {
+    onFulfilled =
+      typeof onFulfilled === "function" ? onFulfilled : (value) => value;
+    onRejected =
+      typeof onRejected === "function"
+        ? onRejected
+        : (reason) => {
+            throw reason;
+          };
+    if (this.PromiseState === myPromise.PENDING) {
+      this.onFulfilledCB.push(onFulfilled);
+      this.onRejectdCB.push(onRejected);
+    }
+    if (this.PromiseState === myPromise.FULFILLED) {
+      setTimeout(() => {
+        onFulfilled(this.PromiseResult);
+      });
+      onFulfilled(this.PromiseResult);
+    }
+    if (this.PromiseState === myPromise.REJECTED) {
+      setTimeout(() => {
+        onRejected(this.PromiseResult);
+      });
+    }
+  }
+}
+console.log(1);
+let promise1 = new myPromise((resolve, reject) => {
+  console.log(2);
+  setTimeout(() => {
+    resolve("banana1");
+    console.log(4);
+  });
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+console.log(3);
+```
+
+输出顺序是：1 2 3 onFulfilled:banana 4  
+咦，输出顺序怎么不太一样呢？其实这里很多人忽视了一个细节，就是 resolve 是需要在事件循环末尾执行的，那我们给 resolve 加上 setTimeout 不就好了
+
+```js
+class myPromise {
+  static PENDING = "pending";
+  static FULFILLED = "fulfilled";
+  static REJECTED = "rejected";
+  constructor(func) {
+    this.PromiseState = myPromise.PENDING;
+    this.PromiseResult = null;
+    this.onFulfilledCB = [];
+    this.onRejectdCB = [];
+    try {
+      func(this.resolve.bind(this), this.reject.bind(this));
+    } catch (err) {
+      this.reject(err);
+    }
+  }
+  resolve(result) {
+    if (this.PromiseState === myPromise.PENDING) {
+      setTimeout(() => {
+        this.PromiseState = myPromise.FULFILLED;
+        this.PromiseResult = result;
+        this.onFulfilledCB.forEach((cb) => {
+          cb(result);
+        });
+      });
+    }
+  }
+  reject(reason) {
+    if (this.PromiseState === myPromise.PENDING) {
+      setTimeout(() => {
+        this.PromiseState = myPromise.REJECTED;
+        this.PromiseResult = reason;
+        this.onRejectdCB.forEach((cb) => {
+          cb(reason);
+        });
+      });
+    }
+  }
+  then(onFulfilled, onRejected) {
+    onFulfilled =
+      typeof onFulfilled === "function" ? onFulfilled : (value) => value;
+    onRejected =
+      typeof onRejected === "function"
+        ? onRejected
+        : (reason) => {
+            throw reason;
+          };
+    if (this.PromiseState === myPromise.PENDING) {
+      this.onFulfilledCB.push(onFulfilled);
+      this.onRejectdCB.push(onRejected);
+    }
+    if (this.PromiseState === myPromise.FULFILLED) {
+      setTimeout(() => {
+        onFulfilled(this.PromiseResult);
+      });
+      onFulfilled(this.PromiseResult);
+    }
+    if (this.PromiseState === myPromise.REJECTED) {
+      setTimeout(() => {
+        onRejected(this.PromiseResult);
+      });
+    }
+  }
+}
+console.log(1);
+let promise1 = new myPromise((resolve, reject) => {
+  console.log(2);
+  setTimeout(() => {
+    resolve("banana1");
+    console.log(4);
+  });
+});
+promise1.then(
+  (result) => {
+    console.log("onFulfilled", result);
+  },
+  (reason) => {
+    console.log("onRejected", reason);
+  }
+);
+console.log(3);
+```
+
+嗯 很棒这次顺序一样了：1 2 3 4 onFulfilled:banana  
+然后我们可以验证下 then 方法是否可以多次调用，答案是可以的，在这里就不过多阐述了，因为重头戏是我们的 then 的链式调用
