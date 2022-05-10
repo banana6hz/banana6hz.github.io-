@@ -81,7 +81,8 @@ module.exports = {
                         ['/blog/basic/net/http','HTTP协议'],
                         ['/blog/basic/net/tcp','TCP/IP协议'],
                         ['/blog/basic/net/session_cookie','cookie与session'],
-                        ['/blog/basic/net/browserRendering','浏览器渲染']
+                        ['/blog/basic/net/browserRendering','浏览器渲染'],
+                        ['/blog/basic/net/huancun','浏览器缓存']
                     ]
                 },
                 ['/blog/jquery/guild','jQuery'],
