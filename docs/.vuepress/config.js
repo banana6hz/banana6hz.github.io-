@@ -15,7 +15,7 @@ module.exports = {
             { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
-            { text: 'Question',link: '/question/js/js01'},
+            { text: '八股文',link: '/question/guild'},
             { text: 'Debug',link: '/debug/guild'},
             { text: 'Tool', link: '/tools/markdown-editor'},
             { text: 'Libraly', 
@@ -43,7 +43,7 @@ module.exports = {
                     title:'CSS',
                     collapsable: true,
                     children: [
-                        ['/blog/basic/css/guild','css基础'],
+                        ['/blog/basic/css/guild',':pointer:css基础'],
                         ['/blog/basic/css/flex','flex布局'],
                         ['/blog/basic/css/z-index','深入理解z-index']
                     ]
@@ -151,24 +151,20 @@ module.exports = {
                 }
             ],
             '/question/': [
+                ['/question/guild','八股文'],
+                ['/question/html/basic','HTML'],
+                ['/question/css/css01', 'CSS'],  
+                ['/question/js/js01','JavaScript'],
+                ['/question/es6/es6_01','ES6'],
+                ['/question/vue/vue01','Vue'],
+                ['/question/jquery/jq01','jquery'],
+                ['/question/js/js02','下面代码输出什么？'],
                 {
-                    title: 'Question',
-                    collapsable: false,
+                    title:'计算机网络',
+                    collapsable: true,
                     children: [
-                        ['/question/js/js01','JS'],
-                        ['/question/js/js02','下面代码输出什么？'],
-                        ['/question/css/css01', 'CSS'],  
-                        ['/question/jquery/jq01','jquery'], 
-                        ['/question/vue/vue01','vue'],
-                        ['/question/es6/es6_01','ES6'],
-                        {
-                            title:'计算机网络',
-                            collapsable: true,
-                            children: [
-                                ['/question/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
-                                ['/question/net/kuayu','浏览器跨域'],
-                            ]
-                        },
+                        ['/question/net/url','输入URL到页面渲染出来，浏览器经历了什么？'],
+                        ['/question/net/kuayu','浏览器跨域'],
                     ]
                 }
             ],
