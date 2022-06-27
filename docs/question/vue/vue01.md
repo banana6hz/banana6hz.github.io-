@@ -686,6 +686,5 @@ Vue.config.errorHandler = function (err, vm, info) {
 
 ## 再加深一下MVVM和MVC的理解
 
-## 🎠oh精神小伙再接再厉哦！
 
 热爱生活 永远热泪盈眶
