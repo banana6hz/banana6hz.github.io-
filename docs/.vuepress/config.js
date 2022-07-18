@@ -15,7 +15,7 @@ module.exports = {
             { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
-            { text: '八股文', link: '/question/guild' },
+            { text: '归档', link: '/question/guild' },
             { text: 'Debug', link: '/debug/guild' },
             { text: 'Tool', link: '/tools/markdown-editor' },
             {
@@ -153,7 +153,7 @@ module.exports = {
                 }
             ],
             '/question/': [
-                ['/question/guild', '八股文'],
+                ['/question/guild', '归档'],
                 ['/question/html/basic', 'HTML'],
                 ['/question/css/css01', 'CSS'],
                 ['/question/js/js01', 'JavaScript'],
