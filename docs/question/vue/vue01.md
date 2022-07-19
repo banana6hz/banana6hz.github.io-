@@ -2,15 +2,73 @@
 
 ## :white_medium_square: 2. Vue 有哪些指令
 
-## :white_medium_square: 3. Vue 有哪些内置组件
+- **v-if**: 是否渲染该元素，切换时元素及它的数据绑定 / 组件被销毁并重建
+- **v-else**/**v-else-if**: 和 v-if 指令搭配使用,没有对应的值.当 v-if 的值 false,v-else/v-else-if 才会被渲染出来
+- **v-show**：是否显示该元素, 切换时改元素的 css 的属性 display 会随着切换
+- **v-once**：只渲染一次,如果后续绑定的值发生了变化,页面不会更新
+- **v-for**：遍历数据进行渲染
+- **v-text**: 更新元素的`textContent`。如果要更新部分的 textContent，需要使用{{ Mustache }} 插值。
 
-## :white_medium_square: 4. Vue 有哪些组件通信的方法
+```js
+<span v-text="msg"></span>
+<!-- 和下面的一样 -->
+<span>{{msg}}</span>
+```
 
-## :white_medium_square: 5. Vue 父子组件生命周期的调用顺序
+- **v-html**: 更新元素的`innerHTML`,内容按普通 HTML 插入 - 不会作为 Vue 模板进行编译。（慎用，可能导致 XSS 攻击）。
+- **v-bind**：简写为：,动态绑定一些元素的属性,类型可以是:字符串、对象或数组
+- **v-on**: 简写@, 用于绑定事件
 
-## 为什么避免 v-if 和 v-for 用在一起
+  - **.stop**: 调用 `event.stopPropagation()`, 阻止事件向上冒泡
+  - **.prevent**: 调用 `event.preventDefault()`， 是拦截默认事件
+  - **.native**: 监听组件根元素的原生事件,给 vue 组件绑定事件时候，必须加上 native ，不然不会生效，等同于在子组件中处理 click 事件然后向外发送 click 事件
+  - **.once**: 只触发一次回调
+  - **.{keyCode | keyAlias}** - 只当事件是从特定键触发时才触发回调。
+    ```js
+      <!-- 键修饰符，键别名 -->
+      <input @keyup.enter="onEnter">
+      <!-- 键修饰符，键代码 -->
+      <input @keyup.13="onEnter">
+    ```
+  - **.capture**：添加事件侦听器时使用 capture 模式。在捕获阶段触发监听函数
+  - **.self**：表示事件只由本身触发，不是来自子节点
 
-因为 `v-for` 的优先级高于 `v-if`  
+  ```js
+   v-on:click.prevent.self 会阻止所有的点击
+   v-on:click.self.prevent 只会阻止对元素自身的点击
+  ```
+
+  - **.passive**: 指不拦截默认事件。在 vue 中，不阻止默认事件，真正的目的是告诉浏览器，你可以不用去查询程序有没有阻止默认事件，也就是**提前告诉**浏览器程序不会阻止，那么意义是什么呢？因为浏览器只有等内核线程执行到事件监听器对应的 JavaScript 代码时，才能知道内部是否会调用 preventDefault 函数来阻止事件的默认行为。这种场景下，用户的手势事件无法快速产生，会导致页面无法快速执行滑动逻辑，从而让用户感觉到页面卡顿，而你添加了.passive 修饰符，就相当于**提前告诉**浏览器程序不会阻止，这样浏览器就不用再去进行查询，就能顺利滑动了。
+  - **.left** - (2.2.0) 只当点击鼠标左键时触发。
+  - **.right** - (2.2.0) 只当点击鼠标右键时触发。
+  - **.middle** - (2.2.0) 只当点击鼠标中键时触发。
+
+- **v-model**: 在表单控件或者组件上创建双向绑定。
+  - .lazy: 取代 input 监听 change 事件
+  - .trim: 输入首尾空格过滤
+  - .number: 输入字符串转为有效的数字
+- **v-slot**: 提供具名插槽或需要接收 prop 的插槽
+- **v-pre**: 用来阻止预编译,输出纯文本
+
+```js
+// message: "Hello,"
+// 未使用v-pre之前，页面显示：Hello, Here I am.
+// 使用v-pre之后，页面显示：Here I am.
+<div v-pre>{{ message }} Here I am.</div>
+```
+
+- **v-cloak**: 元素添加该属性之后，在 HTML 编译完成之后会删除。可以用 CSS 对标签设置样式，表示 HTML 还未被编译，比如可以设置`display: none;`
+
+---
+
+#### 1. v-if 和 v-show 的区别
+
+- v-if: 切换的结果是，页面上是否有这个元素, 耗能较大，不适用于需要频繁切换的元素
+- v-show：切换的结果是，页面上这个元素的 css 属性`display`，耗能较小，可用于需要频繁切换的元素
+
+#### 2. 为什么避免 v-if 和 v-for 用在一起
+
+因为当 `v-for` 和 `v-if` 一起使用时，`v-for` 的优先级比 `v-if` 更高
 来看下面这个 🌰
 
 ```js
@@ -58,6 +116,242 @@ computed:{
     </li>
 </ul>
 ```
+
+## :white_medium_square: 3. Vue 有哪些内置组件
+
+- **component**: 渲染一个“元组件”为动态组件。依 is 的值，来决定哪个组件被渲染。
+- **keep-alive**: 包裹动态组件时，会缓存不活动的组件实例，而不是销毁它们.当组件在`<keep-alive>`内被切换，它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行。
+- **transition**： 给单个元素/组件添加过渡效果，不会额外渲染 DOM 元素
+- **transition-group**：为多个元素/组件添加过渡效果，`<transition-group>` 渲染一个真实的 DOM 元素。默认渲染`<span>`
+- **slot**: 组件模板之中的内容分发插槽
+
+## :white_medium_square: 4. Vue 有哪些组件通信的方法
+
+- prop/$emit
+  父组件向子组件传值：父组件定义需要传入子组件的值，子组件通过 prop 接受数据。
+  > 单向数据流，prop 只读，不可被修改
+
+```js
+// 父组件
+<template>
+    <div>
+        <child :msg="title"></child>
+    </div>
+</tempalte>
+<script>
+export default {
+    name: 'father',
+    data () {
+        return {
+            title: '爸爸叫你回家吃饭了!'
+        }
+    }
+}
+</script>
+
+// 子组件
+<template>
+    <div>
+        {{msg}}
+    </div>
+</tempalte>
+<script>
+export default {
+    name: 'child',
+    props: ['msg']
+}
+</script>
+```
+
+子组件向父组件传值/子组件调用父组件的方法，把值 emit 到父组件
+
+```js
+// 子组件
+<template>
+    <div @click="updateTitle">click之后向父子间传值</div>
+</tempalte>
+<script>
+export default {
+    name: 'child',
+    methods: {
+        updateTitle () {
+            // 子组件向父组件emit这个updateTitle方法，并带上了参数
+            this.$emit('updateTitle', 'this is new Title from child')
+        }
+    }
+}
+</script>
+
+// 父组件
+<template>
+    <div @updateTitle='updateTitle'>{{ title }}</div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            title: 'title'
+        }
+    },
+    methods: {
+        updateTitle (newTitle) {
+            this.title = newTitle // 子组件说我要把title改成newTitle
+        }
+    }
+}
+</script>
+```
+
+- **ref**
+  父组件访问子组件的数据和方法: 如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例
+
+```js
+// 父组件
+<template>
+    <div>
+        <child ref="childRef"/>
+    </div>
+</tempalte>
+<script>
+export default {
+    mounted () {
+        const child = this.$ref.childRef
+        console.log(child.name)
+        child.sayHi()
+    }
+}
+</script>
+// 子组件
+<template>
+    <div>child</div>
+</template>
+<script>
+    export default {
+        data () {
+            return {
+                name: 'banana'
+            }
+        },
+        methods: {
+            sayHi() {
+                console.log('Hi, I am banana')
+            }
+        }
+    }
+</script>
+```
+
+- **$children/$parent**
+  通过$children和$parent 可以访问组件的实例，访问组件的属性和方法
+  > 在#app 上拿$parent得到的是new Vue()的实例，在在这个实例上拿到的$parent 得到的是 undefined,而最低层的子组件拿到的$chilren是空数组。$parent 拿到的是对象，$children 拿到的是数组
+- provide/inject
+  父组件中通过 provide 来提供变量, 然后在子组件中通过 inject 来注入变量，不论子组件嵌套有多深, 只要调用了 inject 那么就可以注入 provide 中的数据，而不局限于只能从当前父组件的 props 属性中获取数据
+- attrs/$listener
+  用于隔代组件的通信
+  > 当设置 inheritAttrs: true（默认）时，子组件的顶层标签元素中会渲染出父组件传递过来的属性
+  > 当设置 inheritAttrs: false 时，子组件的顶层标签元素中不会渲染出父组件传递过来的属性
+  > 不管 inheritAttrs 为 true 或者 false，子组件中都能通过$attrs 属性获取到父组件中传递过来的属性
+
+```js
+// 爷爷组件
+<template>
+    <div>
+        <father
+            :name="name"
+            :age="age"
+            :weight="weight"
+            :height="height"
+            @updateName='updateName'
+        />
+    </div>
+</template>
+<script>
+    export default {
+        name: 'grandpa',
+        data () {
+            return {
+                name: 'yeye'，
+                age： 18，
+                weight：100，
+                height: 160
+            }
+        },
+        methods: {
+            updateName (newName) {
+                this.name = newName
+            }
+        }
+    }
+</script>
+// 爸爸组件
+<template>
+    <div>爸爸</div>
+    <child v-on=$listener v-bind="$attrs"/>
+</template>
+<script>
+export default {
+    name: 'father',
+    props: ['name'],
+    inheritAttrs: false, // 可以关闭自动挂载到组件根元素上的没有在props声明的属性
+    created () {
+        // $attrs存放的父作用域未经过prop定义的属性
+        console.log(this.$attrs) // {age: 18, weight: 100, height: 160}
+    }
+}
+</script>
+// 孙子组件
+<template>
+    <div @click="changeName">孙子{{$attrs}}</div>
+</template>
+<script>
+export default {
+    inheritAttrs: false, // 可以关闭自动挂载到组件根元素上的没有在props声明的属性
+    created () {
+        console.log(this.$attrs) // {weight: 100, height: 160}
+        // 访问的是爷爷组件费prop的属性
+    },
+    methods: {
+        changeName () {
+            this.$emit('updateName', 'cool yeye')
+            // 在孙子组件emit，正常来说应该emit到了父组件
+            // 但是父组件并没有updateName这个函数,但同时父组件有了爷爷组件的作用域
+            // 所以在父组件的作用域里找到了爷爷组件定义的updateName方法
+        }
+    }
+}
+</script>
+```
+
+- **eventBus**
+
+```js
+// event-bus.js
+// 初始化：首先需要创建一个事件总线并将其导出, 以便其他模块可以使用或者监听它
+import Vue from "vue";
+export const EventBus = new Vue();
+
+// 发送事件
+EventBus.$emit("functionName", params);
+// 接受事件
+EventBus.$on("functionName", func); // 接收到函数functionName，则执行函数func
+// 移除事件
+EventBus.$off("functionName");
+```
+
+- **vuex**
+
+#### 总结
+
+父子组件的通信： prop/$emit、ref、$children/$parent、provide / inject、$attrs / $listeners
+兄弟组件：eventBus、vuex
+隔代组件： eventBus、vuex、provide / inject 、$attrs / $listeners
+
+## :white_medium_square: 5. Vue 父子组件生命周期的调用顺序
+
+- **加载渲染过程**：父 beforeCreate => 父 created => 父 beforeMounted => 子 beforeCreate => 子 created => 子 beforeMounted => 子 mounted => 父 mounted
+- **销毁过程**：父 beforeDestroy => 子 beforeDestroy => 子 destroyed => 父 destroyed
+- **子组件更新过程**： 父 beforeUpdate => 子 beforeUpdate => 子 updated => 父 updated
 
 ## vue 如何响应路由参数的变化
 
