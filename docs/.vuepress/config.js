@@ -12,10 +12,10 @@ module.exports = {
         sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
         // lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav: [
+            { text: '归档', link: '/question/guild' },
             { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
-            { text: '归档', link: '/question/guild' },
             { text: 'Debug', link: '/debug/guild' },
             { text: 'Tool', link: '/tools/markdown-editor' },
             {
@@ -157,8 +157,25 @@ module.exports = {
                 ['/question/html/basic', 'HTML'],
                 ['/question/css/css01', 'CSS'],
                 ['/question/js/js01', 'JavaScript'],
+                {
+                    title: 'JavaScript',
+                    collapsable: true,
+                    children: [
+                        ['/question/js/js01', 'JS基础篇'],
+                        ['/question/js/js02', 'JS答疑篇'],
+                        ['/question/js/js03', 'JS手写篇'],
+                    ]
+                },
+                {
+                    title: 'Vue',
+                    collapsable: true,
+                    children: [
+                        ['/question/vue/vue01', 'Vue基础篇'],
+                        ['/question/vue/vue02', 'Vue原理篇'],
+                        ['/question/vue/vue03', 'Vue应用篇'],
+                    ]
+                },
                 ['/question/es6/es6_01', 'ES6'],
-                ['/question/vue/vue01', 'Vue'],
                 ['/question/jquery/jq01', 'jquery'],
                 ['/question/webpack/webpack01', 'webpack'],
                 ['/question/js/js02', '下面代码输出什么？'],
