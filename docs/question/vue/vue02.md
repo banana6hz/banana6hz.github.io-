@@ -56,4 +56,6 @@ vm.items.splice(newLength);
 
 ## nextTick 的原理
 
-##
+## data、props、watch、computed, methods 的初始化的顺序
+
+对照源码可以得出初始化的顺序依次是 prop > methods > data > computed > watch
