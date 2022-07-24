@@ -89,9 +89,10 @@ module.exports = {
                 },
                 ['/blog/jquery/guild', 'jQuery'],
                 {
-                    title: 'VUE',
+                    title: 'Vue',
                     collapsable: true,
                     children: [
+                        ['/blog/vue/双向绑定', '双向绑定原理'],
                         ['/blog/vue/guild', 'Vue指南'],
                         ['/blog/vue/myvue', 'vue手动搭建'],
                         ['/blog/vue/vuelife', 'vue生命周期'],
