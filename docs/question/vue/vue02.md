@@ -59,3 +59,14 @@ vm.items.splice(newLength);
 ## data、props、watch、computed, methods 的初始化的顺序
 
 对照源码可以得出初始化的顺序依次是 prop > methods > data > computed > watch
+
+## vue-router 的实现原理
+
+vue 中的路由有两种模式,hash 模式和 history 模式，默认是 hash 模式
+
+- Hash 模式： 通过监听**浏览器的 hashChange 事件**，当 hash 发生改变时，截取 hash 后面的值去获取对应的路由，再把对应路由的内容塞到页面的指定位置，'新页面'就生成了。hash 模式的所有工作都是前端完成的，缺点就是 url 上面有个#,有些人觉得丑
+- History 模式：通过**HTML5 提供的一个 history 全局对象**，主要就是依靠于 pushState 与 replaceState
+  - window.history.pushState：可以将给定的数据压入到浏览器会话历史栈中
+  - window.history.replaceState：将当前的会话页面的 url 替换成指定的数据
+    他们都会改变当前页面显示的 url，但都不会刷新页面。pushState 是压入浏览器的会话历史栈中，会使得 history.length 加 1，而 replaceState 是替换当前的这条会话历史，因此不会增加 history.length  
+    History 模式需要服务端支持，需要配置当请求资源不存在时，返回 index.html
