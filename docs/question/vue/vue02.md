@@ -64,7 +64,10 @@ vm.items.splice(newLength);
 
 vue 中的路由有两种模式,hash 模式和 history 模式，默认是 hash 模式
 
-- Hash 模式： 通过监听**浏览器的 hashChange 事件**，当 hash 发生改变时，截取 hash 后面的值去获取对应的路由，再把对应路由的内容塞到页面的指定位置，'新页面'就生成了。hash 模式的所有工作都是前端完成的，缺点就是 url 上面有个#,有些人觉得丑
+- Hash 模式：#符号本身以及它后面的字符称之为 hash，可通过 window.location.hash 属性读取。它有以下特点：
+  - hash虽然出现在URL中，但不会被包括在HTTP请求中。它是用来指导浏览器动作的，对服务器端完全无用，因此，改变hash不会重新加载页面
+  - 可以为hash的改变添加监听事件`
+  可以通过监听**浏览器的 hashChange 事件**，当 hash 发生改变时，截取 hash 后面的值去获取对应的路由，再把对应路由的内容塞到页面的指定位置，'新页面'就生成了。hash 模式的所有工作都是前端完成的，缺点就是 url 上面有个#,有些人觉得丑
 - History 模式：通过**HTML5 提供的一个 history 全局对象**，主要就是依靠于 pushState 与 replaceState
   - window.history.pushState：可以将给定的数据压入到浏览器会话历史栈中
   - window.history.replaceState：将当前的会话页面的 url 替换成指定的数据
