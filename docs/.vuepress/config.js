@@ -13,6 +13,7 @@ module.exports = {
         // lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
         nav: [
             { text: '归档', link: '/question/guild' },
+            { text: '专题', link: '/专题/guild' },
             { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
             // { text: 'Debug',link: '/debug/css'}, 
@@ -38,6 +39,24 @@ module.exports = {
             }
         ],
         sidebar: {
+            '/vue2/': [
+                ['/vue2/guild', 'vue2.0'],
+                ['/vue2/生命周期', '生命周期'],
+                ['/vue2/vue的指令', 'vue的指令'],
+                ['/vue2/动态样式', '绑定动态样式'],
+                ['/vue2/双向绑定', '双向数据绑定'],
+                ['/vue2/filter', 'Filter'],
+                ['/vue2/watch和computed', 'Watch和Computed'],
+                ['/vue2/component', 'Component'],
+                ['/vue2/slot', '插槽Slot'],
+                ['/vue2/mixin', '混合Mixin'],
+                ['/vue2/vuex', 'Vuex'],
+                ['/vue2/router', 'Router'],
+                ['/vue2/zujiantongxin', '组件通信'],
+            ],
+            '/vue3/': [
+                ['/vue3/guild', 'vue3.0'],
+            ],
             // 侧边栏在 /blog/上
             '/blog/': [
                 ['/blog/basic/mind', '我的前端'],
