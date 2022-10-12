@@ -97,3 +97,7 @@ export default {
 }
 
 ```
+
+### Setup 的执行
+
+在`beforeCreate`之前执行一次，this 是`undefined`
