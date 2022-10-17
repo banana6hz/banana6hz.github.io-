@@ -1,4 +1,4 @@
-## Hook
+### Hook
 
 `hook`本质上是一个函数，把`setup`函数中使用的`Composition Api`进行封装,类似于 vue2 中的`mixin`。 自定义`hook`的优势，复用代码，让`setup`中的逻辑更清楚易懂。
 

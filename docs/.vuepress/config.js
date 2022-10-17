@@ -37,24 +37,6 @@ module.exports = {
             }
         ],
         sidebar: {
-            '/vue2/': [
-                ['/vue2/guild', 'vue2.0'],
-                ['/vue2/生命周期', '生命周期'],
-                ['/vue2/vue的指令', 'vue的指令'],
-                ['/vue2/动态样式', '绑定动态样式'],
-                ['/vue2/双向绑定', '双向数据绑定'],
-                ['/vue2/filter', 'Filter'],
-                ['/vue2/watch和computed', 'Watch和Computed'],
-                ['/vue2/component', 'Component'],
-                ['/vue2/slot', '插槽Slot'],
-                ['/vue2/mixin', '混合Mixin'],
-                ['/vue2/vuex', 'Vuex'],
-                ['/vue2/router', 'Router'],
-                ['/vue2/zujiantongxin', '组件通信'],
-            ],
-            '/vue3/': [
-                ['/vue3/guild', 'vue3.0'],
-            ],
             // 侧边栏在 /blog/上
             '/blog/': [
                 ['/blog/basic/mind', '我的前端'],
@@ -167,6 +149,43 @@ module.exports = {
                     collapsable: true,
                     children: [
                         ['/blog/suanfa/guild', '算法'],
+                    ]
+                }
+            ],
+            '/专题/': [
+                ['/专题/guild', '专题'],
+                {
+                    title: 'Vue2.0',
+                    children: [
+                        ['/专题/vue2/生命周期', '生命周期'],
+                        ['/专题/vue2/vue的指令', 'vue的指令'],
+                        ['/专题/vue2/动态样式', '绑定动态样式'],
+                        ['/专题/vue2/双向绑定', '双向数据绑定'],
+                        ['/专题/vue2/filter', 'Filter'],
+                        ['/专题/vue2/watch和computed', 'Watch和Computed'],
+                        ['/专题/vue2/component', 'Component'],
+                        ['/专题/vue2/slot', '插槽Slot'],
+                        ['/专题/vue2/mixin', '混合Mixin'],
+                        ['/专题/vue2/vuex', 'Vuex'],
+                        ['/专题/vue2/router', 'Router'],
+                        ['/专题/vue2/zujiantongxin', '组件通信'],
+                    ]
+                },
+                {
+                    title: 'Vue3.0',
+                    children: [
+                        ['/专题/vue3/setup', 'Setup'],
+                        ['/专题/vue3/ref', 'Ref'],
+                        ['/专题/vue3/reactive对比ref', 'Reactive对比ref'],
+                        ['/专题/vue3/computed', 'Computed'],
+                        ['/专题/vue3/watch', 'watch'],
+                        ['/专题/vue3/watcheffect', 'watcheffect'],
+                        ['/专题/vue3/生命周期', '生命周期'],
+                        ['/专题/vue3/响应式原理', '响应式原理'],
+                        ['/专题/vue3/响应式工具', '响应式: 工具'],
+                        ['/专题/vue3/响应式进阶', '响应式: 进阶'],
+                        ['/专题/vue3/provide与inject', 'provide与inject'],
+                        ['/专题/vue3/vue3的变化', 'vue3的变化'],
                     ]
                 }
             ],
