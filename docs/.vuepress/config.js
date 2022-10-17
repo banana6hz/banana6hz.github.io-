@@ -14,10 +14,8 @@ module.exports = {
         nav: [
             { text: '归档', link: '/question/guild' },
             { text: '专题', link: '/专题/guild' },
-            { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
+            // { text: 'Blog', link: '/blog/basic/mind' }, // 内部链接 以docs为根目录
             // { text: 'Photos',  link: '/photos/guild'}, // 内部链接 以docs为根目录
-            // { text: 'Debug',link: '/debug/css'}, 
-            { text: 'Debug', link: '/debug/guild' },
             { text: 'Tool', link: '/tools/markdown-editor' },
             {
                 text: 'Libraly',
@@ -217,12 +215,6 @@ module.exports = {
                 ['/tools/table', 'Table'],
                 ['/tools/screenfull', 'Screenfull'],
                 ['/tools/driver', 'Driver']
-            ],
-            // 侧边栏在 /debug/ 上
-            '/debug/': [
-                ['/debug/js', 'JS'],
-                ['/debug/css', 'CSS'],
-                ['/debug/net', 'NET']
             ],
             // 侧边栏在 /photos/ 上
             '/photos/': [
