@@ -2,8 +2,8 @@
 
 ## :white_medium_square: 1. html 语义化
 
-html 具有一些实际意义的标签，比如`<aside>` `<footer>`,我们给某一块内容加上最恰当最合适的标签，从而
-
+html 具有一些<b>实际意义</b>的标签，比如`<aside>` `<footer>`  
+我们给某一块内容加上最恰当最合适的标签，从而
 - 让页面结构在没有 css 的情况下也能很<b>清晰</b>，不管是谁都能看懂这段内容是干什么的
 - 有利于 <b>SEO</b> 和搜索引擎建立良好的沟通，有助于爬虫抓取更多的有效信息
 - 方便团队开发和维护，语义化更具<b>可读性</b>
@@ -109,12 +109,14 @@ While padding can be applied to all sides of an inline element, only left and ri
 大概意思就是：当我们使用内边距时，只有左右方向有效；当我们设置四个方向的内边距时，对于该行内元素，确实显示出效果，但是竖直方向的内边距只有效果，对其他元素无任何影响
 也就是说，虽然可以通过浏览器的样式看出来效果，但是实际上这个padding并不会造成页面的排版有什么变化。为了更好的理解，可以将该行内元素添加样式display:inline-block就可以看出区别，添加之后该行内元素的高度发生变化，而没有添加的时候，虽然在垂直方向上有padding,但并没有实际意义, 因为它没有撑大盒子，不会对周围的元素产生影响。
 ## :white_medium_square:11. link和@import的区别
-- link不仅仅是用于引入css,也可以引入其他资源, @import只能引入css
-- link链接的内容是和html页面同步加载的,@import需要等到页面全部加载完成之后才能加载
+- 引入的文件类型：link不仅仅是用于引入css,也可以引入其他资源, @import只能引入css
+- 加载的时间：link链接的内容是和html页面同步加载的,@import需要等到页面全部加载完成之后才能加载
 
 ## :white_medium_square: 12. 样式对页面执行流程的影响
+1. css加载不会阻塞DOM树的解析
+2. css加载会阻塞DOM树的渲染
+3. css加载会阻塞后面的js语句的执行
 
-加载js会阻塞HTML的解析,而加载css可能会阻塞js文件的解析，所以加载css也可能会阻塞html的解析
 ![11](../../.vuepress/imgs/interview/html/11_01.png) 
 
 ## :white_medium_square: 13. Script 标签对页面执行流程的影响及优化
