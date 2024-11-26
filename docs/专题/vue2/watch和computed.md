@@ -1,7 +1,13 @@
 ### computed
 
 计算属性：当你的数据需要由其他几个数据得出的时候，可以使用这个计算属性  
- 计算属性`computed`其实也可以被**插值语法**(简单的逻辑:`<p>{{firstName}} - {{lastName}}<p>`),或者函数(较复杂一点的逻辑:`<p>{{getFullName()}}</p>`)替代，
+ 计算属性`computed`其实也可以被**插值语法**替代
+ ```js
+//简单的逻辑:
+// <p>{{firstName}} - {{lastName}}<p>
+// 较复杂一点的逻辑:函数
+// <p>{{getFullName()}}</p>
+ ```
 但是计算属性 computed 有它的优势: **缓存**
 
 ```js
