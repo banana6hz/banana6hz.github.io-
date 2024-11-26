@@ -4,13 +4,13 @@
 
 - 标准盒模型: W3c 标准的盒子模型
   ![CSS](../../.vuepress/imgs/blog/css/box.jpg)  
+   **元素宽度** = `content`  
    **盒子的大小** = `content + border + padding + margin`  
-   **元素宽度** = `content`
 
 - 怪异盒模型: IE 标准的盒子模型  
    ![CSS](../../.vuepress/imgs/blog/css/ieBox.jpg)  
+   **元素宽度** = `content + border + padding`  
    **盒子的大小** = `width（content + border + padding） + margin`  
-   **元素宽度** = `content + border + padding`
 
 - 转换方式
   - `box-sizing:content-box` 时，采用标准模式进行计算，默认就是这种模式
@@ -21,7 +21,7 @@
 
 - 最近的祖先元素大于其他祖先元素
 - 从父元素继承的样式具有最低优先级，任何选择器都可以改变其最终作用的样式
-- important！<span style="color: #D83930"> > </span> ID 选择器 <span style="color: #D83930"> > </span> 伪类选择器 <span style="color: #D83930"> > </span> 属性选择器 <span style="color: #D83930"> > </span> class 选择器 <span style="color: #D83930"> > </span> 元素选择器 <span style="color: #D83930"> > </span> 伪元素选择器
+- important！<span style="color: #D83930"> > </span> style <span style="color: #D83930"> > </span> ID 选择器 <span style="color: #D83930"> > </span> 伪类选择器(:hover) <span style="color: #D83930"> > </span> 属性选择器 <span style="color: #D83930"> > </span> class 选择器 <span style="color: #D83930"> > </span> 元素选择器 <span style="color: #D83930"> > </span> 伪元素选择器（::before）
 
 ## :white_medium_square: 3. margin 的坍塌以及解决方法
 
@@ -34,8 +34,8 @@
   - 给第二个元素包一层 div，设置属性 `overflow:hidden` <span style="color: #D83930">（不推荐，因为这样会改变原有的 HTML 解构）</span>
   - 后面的元素用 `float` 脱离文本流 `float:left;display:inline;`
 - **嵌套块**元素垂直外边距的塌陷: `margin-top + margin-top`, 取较大值  
-  ![margin](../../.vuepress/imgs/interview/css/css_margin_02.png)
-  解决方法：
+  ![margin](../../.vuepress/imgs/interview/css/css_margin_02.png)  
+  解决方法：  
   - 创建一个 BFC，给父元素添加属性 `overflow:hidden` /` position: fixed` / `position: absolute` / `display:inlin-block` / `display:flex` / `display:block`
   - 给父元素添加 `border` / `padding` 属性:`border:1px solid transparent;`,`padding:1px;`
   - 给子元素添加一个兄弟元素，属性为 `content:"";overflow: hidden;`
